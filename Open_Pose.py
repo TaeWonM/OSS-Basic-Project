@@ -72,3 +72,15 @@ while cv2.waitKey(1) <0:
             points.append((int(x), int(y)))
         else :
             points.append(None)
+    
+    
+    # 각 POSE_PAIRS별로 선 그어줌 (머리 - 목, 목 - 왼쪽어깨, ...)
+    for pair in POSE_PAIRS:
+        partA = pair[0]             # Head
+        partA = BODY_PARTS[partA]   # 0
+        partB = pair[1]             # Neck
+        partB = BODY_PARTS[partB]   # 1
+        
+        #partA와 partB 사이에 선을 그어줌 (cv2.line)
+        if points[partA] and points[partB]:
+            cv2.line(frame, points[partA], points[partB], (0, 255, 0), 2)
