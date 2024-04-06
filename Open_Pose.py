@@ -17,3 +17,12 @@ POSE_PAIRS = [ ["Head", "Neck"], ["Neck", "RShoulder"], ["RShoulder", "RElbow"],
 BASE_DIR=Path(__file__).resolve().parent
 protoFile = str(BASE_DIR)+"/model/pose_deploy_linevec_faster_4_stages.prototxt"
 weightsFile = str(BASE_DIR)+"/model/pose_iter_160000.caffemodel"
+
+# 카메라, 모델, 입력 크기 설정
+net = cv2.dnn.readNetFromCaffe(protoFile, weightsFile)
+
+capture = cv2.VideoCapture(0)
+
+inputWidth=320
+inputHeight=240
+inputScale=1.0/255
