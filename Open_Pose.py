@@ -27,7 +27,7 @@ inputWidth=320
 inputHeight=240
 inputScale=1.0/255
 
-#프레임을 처음에 읽고 만약 카메라를 읽을 수 없다면 프로그램 좀료하는 부분
+#프레임을 처음에 읽고 만약 카메라를 읽을 수 없다면 프로그램 종료하는 부분
 hasFrame, frame = capture.read()
 if not hasFrame:
     cv2.waitKey()
@@ -43,3 +43,12 @@ while cv2.waitKey(1) <0:
 
     frameWidth = frame.shape[1]
     frameHeight = frame.shape[0]
+
+    #변수에 프레임을 blob로 형 변환하는 부분
+    inpBlob = cv2.dnn.blobFromImage(frame, inputScale, (inputWidth, inputHeight), (0, 0, 0), swapRB=False, crop=False)
+
+    # network에 넣어주기
+    net.setInput(inpBlob)
+
+    # 결과 받아오기
+    output = net.forward()
