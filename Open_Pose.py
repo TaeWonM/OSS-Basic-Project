@@ -84,3 +84,8 @@ while cv2.waitKey(1) <0:
         #partA와 partB 사이에 선을 그어줌 (cv2.line)
         if points[partA] and points[partB]:
             cv2.line(frame, points[partA], points[partB], (0, 255, 0), 2)
+
+    cv2.imshow("Output-Keypoints",frame)
+ 
+capture.release()  #카메라 장치에서 받아온 메모리 해제
+cv2.destroyAllWindows() #모든 윈도우 창 닫음
