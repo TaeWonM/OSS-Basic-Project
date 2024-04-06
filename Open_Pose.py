@@ -52,3 +52,16 @@ while cv2.waitKey(1) <0:
 
     # 결과 받아오기
     output = net.forward()
+
+    # 신뢰도를 측정하여서 그 관절 포인트가 맞는지 확인하는 부분.
+    points = []
+    for i in range(0,15):
+        # 해당 신체부위 신뢰도 얻음.
+        probMap = output[0, i, :, :]
+    
+        # global 최대값 찾기
+        minVal, prob, minLoc, point = cv2.minMaxLoc(probMap)
+
+        # 원래 이미지에 맞게 점 위치 변경
+        x = (frameWidth * point[0]) / output.shape[3]
+        y = (frameHeight * point[1]) / output.shape[2]
