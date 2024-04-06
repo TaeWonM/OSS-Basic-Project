@@ -65,3 +65,10 @@ while cv2.waitKey(1) <0:
         # 원래 이미지에 맞게 점 위치 변경
         x = (frameWidth * point[0]) / output.shape[3]
         y = (frameHeight * point[1]) / output.shape[2]
+        # 키포인트 검출한 결과가 0.1보다 크면(검출한곳이 위 BODY_PARTS랑 맞는 부위면) points에 추가, 검출했는데 부위가 없으면 None으로    
+        if prob > 0.1 :    
+            cv2.circle(frame, (int(x), int(y)), 3, (0, 255, 255), thickness=-1, lineType=cv2.FILLED) # circle(그릴곳, 원의 중심, 반지름, 색)
+            cv2.putText(frame, "{}".format(i), (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1, lineType=cv2.LINE_AA)
+            points.append((int(x), int(y)))
+        else :
+            points.append(None)
