@@ -26,3 +26,13 @@ capture = cv2.VideoCapture(0)
 inputWidth=320
 inputHeight=240
 inputScale=1.0/255
+
+
+#반복문을 통한 카메라 프레임을 계속 불러옴
+while cv2.waitKey(1) <0:
+    hasFrame, frame = capture.read()
+    # 프레임의 크기를 줄여서 연산의 개수를 줄이는 부분 (선택)
+    frame=cv2.resize(frame,dsize=(320,240),interpolation=cv2.INTER_AREA)
+    
+    frameWidth = frame.shape[1]
+    frameHeight = frame.shape[0]
