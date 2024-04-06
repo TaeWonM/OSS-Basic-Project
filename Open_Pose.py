@@ -12,3 +12,8 @@ POSE_PAIRS = [ ["Head", "Neck"], ["Neck", "RShoulder"], ["RShoulder", "RElbow"],
                 ["RElbow", "RWrist"], ["Neck", "LShoulder"], ["LShoulder", "LElbow"],
                 ["LElbow", "LWrist"], ["Neck", "Chest"], ["Chest", "RHip"], ["RHip", "RKnee"],
                 ["RKnee", "RAnkle"], ["Chest", "LHip"], ["LHip", "LKnee"], ["LKnee", "LAnkle"] ]
+
+# 각 파일 path
+BASE_DIR=Path(__file__).resolve().parent
+protoFile = str(BASE_DIR)+"/model/pose_deploy_linevec_faster_4_stages.prototxt"
+weightsFile = str(BASE_DIR)+"/model/pose_iter_160000.caffemodel"
