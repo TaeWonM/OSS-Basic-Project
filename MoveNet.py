@@ -54,3 +54,73 @@ def run_inference(model, input_size, image):
         scores.append(score)
 
     return keypoints, scores
+
+#main Method
+def main():
+
+    args = get_args()
+    cap_device = args.device
+    cap_width = args.width
+    cap_height = args.height
+
+    if args.file is not None:
+        cap_device = args.file
+
+    mirror = args.mirror
+    model_select = args.model_select
+    keypoint_score_th = args.keypoint_score
+
+    # Video Capture
+    cap = cv.VideoCapture(cap_device)
+    cap.set(cv.CAP_PROP_FRAME_WIDTH, cap_width)
+    cap.set(cv.CAP_PROP_FRAME_HEIGHT, cap_height)
+
+    # Set model
+    if model_select == 0:
+        model_url = "https://tfhub.dev/google/movenet/singlepose/lightning/4"
+        input_size = 192
+    elif model_select == 1:
+        model_url = "https://tfhub.dev/google/movenet/singlepose/thunder/4"
+        input_size = 256
+    else:
+        sys.exit(
+            "*** model_select {} is invalid value. Please use 0-1. ***".format(
+                model_select))
+
+    module = tfhub.load(model_url)
+    model = module.signatures['serving_default']
+
+    while True:
+        start_time = time.time()
+
+        ret, frame = cap.read()
+        if not ret:
+            break
+        if mirror:
+            frame = cv.flip(frame, 1)
+        debug_image = copy.deepcopy(frame)
+
+        keypoints, scores = run_inference(
+            model,
+            input_size,
+            frame,
+        )
+
+        elapsed_time = time.time() - start_time
+
+        debug_image = draw_debug(
+            debug_image,
+            elapsed_time,
+            keypoint_score_th,
+            keypoints,
+            scores,
+        )
+
+        key = cv.waitKey(1)
+        if key == 27:  # ESC
+            break
+
+        cv.imshow('MoveNet(singlepose) Demo', debug_image)
+
+    cap.release()
+    cv.destroyAllWindows()
