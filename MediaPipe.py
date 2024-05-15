@@ -17,6 +17,12 @@ with mp_pose.Pose(
     if not success:
       print("Ignoring empty camera frame.")
       continue
+    # To improve performance, optionally mark the image as not writeable to
+    # pass by reference.
+    image.flags.writeable = False
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    results = pose.process(image)
+    cv2.imshow('MediaPipe Pose', cv2.flip(image, 1))
     if cv2.waitKey(1) & 0xFF == 27:
       break
 cap.release()
