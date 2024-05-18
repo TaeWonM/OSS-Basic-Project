@@ -1,4 +1,8 @@
-# OSS-Basic-Project
+# Project Name
+- 건강 게임 (Health Game)
+- Introduce
+  It's a game inspired by a health game (etc. Ringpit).
+  Please enjoy our game. XD
  - How to Run
     1. Download Python (https://www.python.org/downloads/)
     2. After download, Please Set your Python path into environment variable.
