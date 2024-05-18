@@ -14,4 +14,11 @@
   1. Min TaeWon [https://github.com/TaeWonM]
   2. Choi Yoonseo [https://github.com/Gorushi]
 # Development Period
-  2024.03.22(FRI) ~ 2024.06.08(SAT) 
+  2024.03.22(FRI) ~ 2024.06.08(SAT)
+# Test Appliances
+ - 1
+   - Kind of Test Appliances : Laptop
+   - OS : Windows
+   - CPU : 12th Gen Intel(R) Core(TM) i5-12500H
+   - Cam : USB2.0 HD UVC WebCam
+   - GPU : Intel(R) Iris(R) Xe Graphics
