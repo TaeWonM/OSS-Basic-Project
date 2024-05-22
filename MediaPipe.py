@@ -33,6 +33,28 @@ def radian (one, center, two):
   else:
     return abs((o1-o2) * 180/math.pi)
 
+def right_push_up(result_list , movecount, stat):
+  try :
+    d = {}
+    d['x'] = result_list[27]['x']
+    d['y'] = result_list[25]['y']
+    if (radian(d,result_list[25],result_list[27])<60):
+      if (stat[0] == 0) : 
+        stat[0] = 1
+    else : 
+      stat[0] = 0
+    if (stat[0] >= 1):
+      ra = radian(result_list[11],result_list[13],result_list[15])
+      if (ra <= 200 and ra >= 155):
+        stat[0] = 2
+      elif (stat[0] == 2 and ra <= 130 and radian(result_list[11],result_list[23],result_list[25]) > 145):
+        stat[0] = 1
+        movecount[0]+=1
+        print(movecount[0])
+    return False
+  except :
+    return True
+
 # For webcam input:
 cap = cv2.VideoCapture(0)
 with mp_pose.Pose(
