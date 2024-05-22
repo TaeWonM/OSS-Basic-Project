@@ -13,6 +13,12 @@ def setdict (result, image):
   try :
     for k in range(0,33):
       d = {}
+      if (result.pose_landmarks.landmark[k].visibility>=0.5):
+        x = result.pose_landmarks.landmark[k].x * image_width
+        y = result.pose_landmarks.landmark[k].y * image_height
+        d['num'] = k
+        d['x'] = x
+        d['y'] = y
       l.append(d)
   except :
     print()
