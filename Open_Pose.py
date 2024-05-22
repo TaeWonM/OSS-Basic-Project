@@ -21,6 +21,7 @@ weightsFile = str(BASE_DIR)+"/model/pose_iter_160000.caffemodel"
 # 카메라, 모델, 입력 크기 설정
 net = cv2.dnn.readNetFromCaffe(protoFile, weightsFile)
 
+# windows = 0 / m1 macbook air = 1
 capture = cv2.VideoCapture(0)
 
 inputWidth=320
