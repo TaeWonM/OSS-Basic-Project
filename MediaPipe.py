@@ -7,6 +7,8 @@ import numpy as np
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_pose = mp.solutions.pose
+status = [0]
+movecount = [0]
 
 def setdict (result, image):
   l = []
@@ -33,7 +35,6 @@ def radian (one, center, two):
   else:
     return abs((o1-o2) * 180/math.pi)
 
-<<<<<<< HEAD
 def right_push_up(result_list , movecount, stat):
   try :
     d = {}
@@ -100,6 +101,9 @@ with mp_pose.Pose(
         results.pose_landmarks,
         mp_pose.POSE_CONNECTIONS,
         landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
+    result_list = setdict(results, image.shape)
+    if (right_push_up(result_list, movecount, status) and right_push_up(result_list, movecount, status)):
+      print("No detacted")
     # Flip the image horizontally for a selfie-view display.
     cv2.imshow('MediaPipe Pose', cv2.flip(image, 1))
     if cv2.waitKey(1) & 0xFF == 27:
