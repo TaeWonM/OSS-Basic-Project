@@ -1,6 +1,7 @@
 # pip install mediapipe
 # define imports and settings
 import cv2
+import math
 import mediapipe as mp
 import numpy as np
 mp_drawing = mp.solutions.drawing_utils
@@ -23,6 +24,15 @@ def setdict (result, image):
   except :
     print()
   return l
+
+def radian (one, center, two):
+  o1 = math.atan2((two['y']-center['y']),(two['x'] - center['x'])) 
+  o2 = math.atan2((one['y']-center['y']),(one['x'] - center['x']))
+  if (abs((o1-o2) * 180/math.pi) >= 180):
+    return 360 - abs((o1-o2) * 180/math.pi)
+  else:
+    return abs((o1-o2) * 180/math.pi)
+
 # For webcam input:
 cap = cv2.VideoCapture(0)
 with mp_pose.Pose(
