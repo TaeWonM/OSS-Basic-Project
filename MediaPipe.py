@@ -7,6 +7,16 @@ mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_pose = mp.solutions.pose
 
+def setdict (result, image):
+  l = []
+  image_height, image_width, _ = image
+  try :
+    for k in range(0,33):
+      d = {}
+      l.append(d)
+  except :
+    print()
+  return l
 # For webcam input:
 cap = cv2.VideoCapture(0)
 with mp_pose.Pose(
