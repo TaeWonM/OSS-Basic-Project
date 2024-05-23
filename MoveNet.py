@@ -43,6 +43,33 @@ def right_push_up(result_list , movecount, stat, score, keypoint_score_th):
         return False
     else :
         return True
+    
+def left_push_up(result_list , movecount, stat, score, keypoint_score_th):
+    if (score[14] >=  keypoint_score_th and 
+        score[16] >=  keypoint_score_th and
+        score[6] >=  keypoint_score_th and
+        score[8] >=  keypoint_score_th and
+        score[10] >=  keypoint_score_th and
+        score[12] >=  keypoint_score_th):
+        d = []
+        d.append(result_list[14][0]) #x
+        d.append(result_list[16][1])#y
+        if (radian(d,result_list[16],result_list[14])<60):
+            if (stat[0] == 0) : 
+                stat[0] = 1
+        else : 
+            stat[0] = 0
+        if (stat[0] >= 1):
+            ra = radian(result_list[6],result_list[8],result_list[10])
+            if (ra <= 200 and ra >= 155):
+                stat[0] = 2
+            elif (stat[0] == 2 and ra <= 150 and radian(result_list[6],result_list[12],result_list[14]) > 145):
+                stat[0] = 1
+                movecount[0]+=1
+                print(movecount[0])
+        return False
+    else :
+        return True
 
 index1 = [[0,1],
           [0,2],
