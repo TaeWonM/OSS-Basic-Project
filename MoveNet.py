@@ -9,6 +9,9 @@ import numpy as np
 import tensorflow as tf
 import tensorflow_hub as tfhub
 
+status= [0]
+movecount = [0]
+
 def radian (one, center, two):
   o1 = math.atan2((two[1]-center[1]),(two[0] - center[0])) 
   o2 = math.atan2((one[1]-center[1]),(one[0] - center[0]))
@@ -153,7 +156,9 @@ def main():
             keypoints,
             scores,
         )
-
+        if (right_push_up(keypoints, movecount, status, scores, keypoint_score_th) and 
+            left_push_up(keypoints, movecount, status, scores, keypoint_score_th)):
+            print("No detacted" , status[0])
         key = cv.waitKey(1)
         if key == 27:  # ESC
             break
