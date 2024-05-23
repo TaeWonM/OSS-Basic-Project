@@ -16,6 +16,33 @@ def radian (one, center, two):
     return 360 - abs((o1-o2) * 180/math.pi)
   else:
     return abs((o1-o2) * 180/math.pi)
+  
+def right_push_up(result_list , movecount, stat, score, keypoint_score_th):
+    if (score[13] >=  keypoint_score_th and 
+        score[15] >=  keypoint_score_th and
+        score[5] >=  keypoint_score_th and
+        score[7] >=  keypoint_score_th and
+        score[9] >=  keypoint_score_th and
+        score[11] >=  keypoint_score_th):
+        d = []
+        d.append(result_list[13][0]) #x
+        d.append(result_list[15][1]) #y
+        if (radian(d,result_list[15],result_list[13])<60):
+            if (stat[0] == 0) : 
+                stat[0] = 1
+        else : 
+            stat[0] = 0
+        if (stat[0] >= 1):
+            ra = radian(result_list[5],result_list[7],result_list[9])
+            if (ra <= 200 and ra >= 155):
+                stat[0] = 2
+            elif (stat[0] == 2 and ra <= 150 and radian(result_list[5],result_list[11],result_list[13]) > 145):
+                stat[0] = 1
+                movecount[0]+=1
+                print(movecount[0])
+        return False
+    else :
+        return True
 
 index1 = [[0,1],
           [0,2],
