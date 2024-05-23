@@ -3,11 +3,19 @@
 
 import sys
 import copy
-
+import math
 import cv2 as cv
 import numpy as np
 import tensorflow as tf
 import tensorflow_hub as tfhub
+
+def radian (one, center, two):
+  o1 = math.atan2((two[1]-center[1]),(two[0] - center[0])) 
+  o2 = math.atan2((one[1]-center[1]),(one[0] - center[0]))
+  if (abs((o1-o2) * 180/math.pi) >= 180):
+    return 360 - abs((o1-o2) * 180/math.pi)
+  else:
+    return abs((o1-o2) * 180/math.pi)
 
 index1 = [[0,1],
           [0,2],
