@@ -77,6 +77,31 @@ def left_push_up(result_list , movecount, stat):
     return False
   except :
     return True
+  
+def right_sqaut (result_list , movecount, stat) :
+  try : 
+    d = {}
+    d['x'] = result_list[26]['x']
+    d['y'] = result_list[28]['y']
+    if (radian(d,result_list[28],result_list[26])>45):
+      if (stat[0] == 0) : 
+        stat[0] = 1
+    else : 
+      stat[0] = 0
+    if (stat[0] >= 1):
+      ra = radian(result_list[24],result_list[26],result_list[28]);
+      if (ra >= 145):
+        stat[0] = 2
+      elif(stat[0] == 2 and ra <= 90):
+        stat[0] = 1
+        movecount[0]+=1
+        print(movecount[0])
+    print(ra)
+    return False
+  except:
+    return True
+  
+
 
 cap = cv2.VideoCapture(0)
 with mp_pose.Pose(
