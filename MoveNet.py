@@ -206,7 +206,10 @@ def main():
         )
         if (right_push_up(keypoints, movecount, status, scores, keypoint_score_th) and 
             left_push_up(keypoints, movecount, status, scores, keypoint_score_th)):
-            print("No detacted" , status[0])
+            print("No Push_up Pose detected")
+        if (right_sqaut(keypoints, movecount, status, scores, keypoint_score_th) and 
+            left_sqaut(keypoints, movecount, status, scores, keypoint_score_th)):
+            print("No Sqaut Pose detected")
         key = cv.waitKey(1)
         if key == 27:  # ESC
             break
