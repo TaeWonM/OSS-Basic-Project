@@ -74,6 +74,30 @@ def left_push_up(result_list , movecount, stat, score, keypoint_score_th):
     else :
         return True
 
+def right_sqaut (result_list , movecount, stat, score, keypoint_score_th) :
+    if (score[14] >=  keypoint_score_th and 
+        score[16] >=  keypoint_score_th and
+        score[12] >=  keypoint_score_th):
+        d = []
+        d.append(result_list[14][0])
+        d.append(result_list[16][1])
+        if (radian(d,result_list[16],result_list[14])>45):
+            if (stat[0] == 0) : 
+                stat[0] = 1
+        else : 
+            stat[0] = 0
+        if (stat[0] >= 1):
+            ra = radian(result_list[12],result_list[14],result_list[16]);
+            if (ra >= 145):
+                stat[0] = 2
+            elif(stat[0] == 2 and ra <= 110):
+                stat[0] = 1
+                movecount[0]+=1
+                print(movecount[0])
+        return False
+    else:
+        return True
+
 index1 = [[0,1],
           [0,2],
           [1,3],
