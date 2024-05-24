@@ -90,7 +90,7 @@ def right_sqaut (result_list , movecount, stat, score, keypoint_score_th) :
             ra = radian(result_list[12],result_list[14],result_list[16]);
             if (ra >= 145):
                 stat[0] = 2
-            elif(stat[0] == 2 and ra <= 110):
+            elif(stat[0] == 2 and ra <= 120):
                 stat[0] = 1
                 movecount[0]+=1
                 print(movecount[0])
@@ -114,7 +114,7 @@ def left_sqaut(result_list , movecount, stat, score, keypoint_score_th) :
             ra = radian(result_list[11],result_list[13],result_list[15]);
             if (ra >= 145):
                 stat[0] = 2
-            elif(stat[0] == 2 and ra <= 100):
+            elif(stat[0] == 2 and ra <= 120):
                 stat[0] = 1
                 movecount[0]+=1
                 print(movecount[0])
@@ -206,7 +206,7 @@ def main():
         )
         if (right_push_up(keypoints, movecount, status, scores, keypoint_score_th) and 
             left_push_up(keypoints, movecount, status, scores, keypoint_score_th)):
-            print("No Push_up Pose detected")
+            print("No Push_up Pose detected" , status[0])
         if (right_sqaut(keypoints, movecount, status, scores, keypoint_score_th) and 
             left_sqaut(keypoints, movecount, status, scores, keypoint_score_th)):
             print("No Sqaut Pose detected")
