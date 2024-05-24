@@ -3,7 +3,6 @@
 import cv2
 import math
 import mediapipe as mp
-import numpy as np
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_pose = mp.solutions.pose
@@ -60,8 +59,8 @@ def right_push_up(result_list , movecount, stat):
 def left_push_up(result_list , movecount, stat):
   try :
     d = {}
-    d['x'] = result_list[27]['x']
-    d['y'] = result_list[25]['y']
+    d['x'] = result_list[28]['x']
+    d['y'] = result_list[26]['y']
     if (radian(d,result_list[26],result_list[28])<60):
       if (stat[0] == 0) : 
         stat[0] = 1
