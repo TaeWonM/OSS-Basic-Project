@@ -165,3 +165,28 @@ class fight_screen:
                             daemon=True,
                         )
                         self.Thread1.start()
+
+    # This method handles variables by many situations
+    def update(self):
+        # In this statement, Catch player's attacks. and add into bodys variable
+        try:
+            if self.model.attack_flag:
+                self.model.attack_flag = False
+                self.fight_container[0].attacked(5)
+                if self.select_cout == 2:
+                    self.bodys["Upper_body"] += 3
+                elif self.select_cout == 3:
+                    self.bodys["Lower_body"] += 3
+        except:
+            pass
+        # In this if statement, find enemy is dead and return to main interface
+        if self.fight_container[0].cur_heart <= 0:
+            self.move_interface_flag = True
+            self.model.kill_thread = True
+        # In this if statement, adjust the wrong values
+        if self.select_cout <= 2:
+            self.select_cout = 2
+        elif self.select_cout >= 3:
+            self.select_cout = 3
+        self.enemy.move_img()
+        pass
