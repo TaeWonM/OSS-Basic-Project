@@ -58,21 +58,24 @@ def main():
                             curent_screen = interface.model_select_screen(
                                 screen, model_count
                             )
-                        case "main":
-                            screen_stack.append(curent_screen)
-                            curent_screen = interface.fight_screen(
-                                screen,
-                                curent_screen.enemy,
-                                model_count,
-                                body,
-                                curent_screen.enemy_index,
-                            )
-                        case "fight":
-                            enemy_index = curent_screen.enemy_index
-                            curent_screen = screen_stack.pop()
-                            curent_screen.move_interface_flag = False
-                            curent_screen.enemy[enemy_index].kill()
-                            curent_screen.enemy.remove(curent_screen.enemy[enemy_index])
+                case "main":
+                    screen_stack.append(curent_screen)
+                    curent_screen = interface.fight_screen(
+                        screen,
+                        curent_screen.enemy,
+                        model_count,
+                        body,
+                        curent_screen.enemy_index,
+                    )
+                case "fight":
+                    enemy_index = curent_screen.enemy_index
+                    curent_screen = screen_stack.pop()
+                    curent_screen.move_interface_flag = False
+                    curent_screen.enemy[enemy_index].kill()
+                    curent_screen.enemy.remove(curent_screen.enemy[enemy_index])
+                case "model_select":
+                    curent_screen = screen_stack.pop()
+                    curent_screen.move_interface_flag = False
         pygame.display.update()
         clock.tick(60)
 
