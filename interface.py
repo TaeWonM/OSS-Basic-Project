@@ -346,3 +346,23 @@ class model_select_screen:
         self.model = ["Mediapipe", "Movenet"]
         # This contains font style
         self.font = pygame.font.SysFont(None, 75)
+
+    # This is a method to handle events
+    # In this method, Catch direction key to change buttons
+    def handle_event(self, event):
+        # if statement to detect change buttons
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                self.select_cout -= 1
+            if event.key == pygame.K_DOWN:
+                self.select_cout += 1
+        # if statement to detect Enter key to change model variable
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_RETURN:
+                match (self.select_cout):
+                    case 0:
+                        self.model_count[0] = 0
+                        self.move_interface_flag = True
+                    case 1:
+                        self.model_count[0] = 1
+                        self.move_interface_flag = True
