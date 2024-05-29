@@ -22,6 +22,9 @@ def main():
     clock = pygame.time.Clock()
     curent_screen = interface.main_screen(screen, body)
     screen_stack.append(curent_screen)
+    while True:
+        pygame.display.update()
+        clock.tick(60)
 
 
 if __name__ == "__main__":
