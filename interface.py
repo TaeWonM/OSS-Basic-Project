@@ -397,3 +397,28 @@ class model_select_screen:
     # This is method to find what current screen is in
     def return_screen(self):
         return "model_select"
+
+
+# The class for statistics interface
+# It contains setting blocks
+# Also, It has parameters screen, bodys
+class statistics_screen:
+    def __init__(self, screen, body):
+        # variable that contains exercise recode
+        self.bodys = body
+        self.screen = screen
+        # variable that contains statistics image
+        self.img = pygame.image.load("statistics.png")
+        self.move_interface_flag = False
+        # statement to add updated exercise recode
+        static.set_statious(body[len(body) - 1])
+        # This contains font style
+        self.font = pygame.font.SysFont(None, 60)
+        # variable that contains what screen have chosen
+        self.screen_count = 0
+        # variable that contains what index to start in each screen
+        self.max_index = [0]
+        # variable that contains blocks to move other screen
+        self.select_cout = 0
+        # variable that contains selection blocks
+        self.container = container.static_container()
