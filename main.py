@@ -9,6 +9,11 @@ def main():
     bodys = static.get_statious()
     static.nomalization_statious()
     bodys = static.get_statious()
+    body = bodys[len(bodys) - 1]
+    static.nomalization_statious()
+    pygame.init()
+    screen = pygame.display.set_mode((window_width, window_height))
+    pygame.display.set_caption("H.G")
 
 
 if __name__ == "__main__":
