@@ -308,3 +308,21 @@ class setting_screen:
         elif self.select_cout >= 3:
             self.select_cout = 3
         pass
+
+    # This is method to draw interface objects
+    def draw(self):
+        self.screen.blit(self.image, [0, 0])
+        for i in range(0, 4):
+            if i == self.select_cout:
+                pygame.draw.rect(self.screen, (255, 0, 0), self.select_button[i])
+            else:
+                pygame.draw.rect(self.screen, (0, 0, 0), self.select_button[i])
+        self.font = pygame.font.SysFont(None, 20)
+
+    # This is method to draw background and other characters
+    def move_interface(self):
+        return self.move_interface_flag
+
+    # This is method to find what current screen is in
+    def return_screen(self):
+        return "setting"
