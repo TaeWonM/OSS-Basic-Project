@@ -52,3 +52,11 @@ def fight_container():
     container.append(pygame.Rect(120, 830, 32, 32))
     container.append(pygame.Rect(580, 830, 32, 32))
     return container
+
+
+# method that make model select blocks list
+def model_select_container():
+    container = []
+    container.append(pygame.Rect(270, 422, 32, 32))
+    container.append(pygame.Rect(270, 724, 32, 32))
+    return container
