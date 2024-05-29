@@ -247,7 +247,7 @@ class fight_screen:
             ],
         )
 
-    # This is method to draw background and other characters
+    # This is method to return move_interface_flag variable
     def move_interface(self):
         return self.move_interface_flag
 
@@ -319,7 +319,7 @@ class setting_screen:
                 pygame.draw.rect(self.screen, (0, 0, 0), self.select_button[i])
         self.font = pygame.font.SysFont(None, 20)
 
-    # This is method to draw background and other characters
+    # This is method to return move_interface_flag variable
     def move_interface(self):
         return self.move_interface_flag
 
@@ -390,7 +390,7 @@ class model_select_screen:
             [202, 880],
         )
 
-    # This is method to draw background and other characters
+    # This is method to return move_interface_flag variable
     def move_interface(self):
         return self.move_interface_flag
 
@@ -533,3 +533,11 @@ class statistics_screen:
                 self.font.render("", True, (0, 0, 0)),
                 (30, 30),
             )
+
+    # This is method to return move_interface_flag variable
+    def move_interface(self):
+        return self.move_interface_flag
+
+    # This is method to find what current screen is in
+    def return_screen(self):
+        return "Static"
