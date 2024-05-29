@@ -81,3 +81,18 @@ class main_screen:
                 enemy.rect.x = random.randint(0, 988)
                 enemy.rect.y = random.randint(0, 988)
                 self.enemy.append(enemy)
+
+    # This is method to draw background and other characters
+    def draw(self):
+        self.background_group.add(self.player)
+        for i in range(0, len(self.enemy)):
+            self.background_group.add(self.enemy[i])
+        self.background_group.draw(self.screen)
+
+    # This is method to return move_interface_flag variable
+    def move_interface(self):
+        return self.move_interface_flag
+
+    # This is method to find what current screnn is in
+    def return_screen(self):
+        return "main"
