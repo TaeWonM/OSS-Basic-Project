@@ -23,6 +23,11 @@ def main():
     curent_screen = interface.main_screen(screen, body)
     screen_stack.append(curent_screen)
     while True:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                static.set_statious(body)
+                pygame.quit()
+                sys.exit()
         pygame.display.update()
         clock.tick(60)
 
