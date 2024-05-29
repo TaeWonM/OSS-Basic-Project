@@ -326,3 +326,23 @@ class setting_screen:
     # This is method to find what current screen is in
     def return_screen(self):
         return "setting"
+
+
+# The class for model select interface
+# It contains setting blocks
+# Also, It has parameters screen, bodys, model_count
+class model_select_screen:
+    def __init__(self, screen, model_count):
+        self.screen = screen
+        # variable that contains model select image
+        self.image = pygame.image.load("change_model.png")
+        # variable that contains what model have chosen before
+        self.select_cout = model_count[0]
+        self.model_count = model_count
+        # variable that contains selection blocks
+        self.select_button = container.model_select_container()
+        self.move_interface_flag = False
+        # variable that contains model's name
+        self.model = ["Mediapipe", "Movenet"]
+        # This contains font style
+        self.font = pygame.font.SysFont(None, 75)
