@@ -442,3 +442,11 @@ class statistics_screen:
                     case 1:
                         if self.screen_count + 1 < len(self.max_index):
                             self.screen_count += 1
+
+    # This method handles variables by many situations
+    def update(self):
+        # In this if statement, adjust the wrong values
+        if self.select_cout < 0:
+            self.select_cout = 0
+        elif self.select_cout > 1:
+            self.select_cout = 1
