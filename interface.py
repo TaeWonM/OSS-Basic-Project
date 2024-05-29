@@ -366,3 +366,11 @@ class model_select_screen:
                     case 1:
                         self.model_count[0] = 1
                         self.move_interface_flag = True
+
+    # This method handles variables by many situations
+    def update(self):
+        # In this if statement, adjust the wrong values
+        if self.select_cout <= 0:
+            self.select_cout = 0
+        elif self.select_cout >= 1:
+            self.select_cout = 1
