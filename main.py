@@ -7,7 +7,6 @@ import static
 
 
 def main():
-    # 통계에 필요한 값들을 bodys 변수에 저장
     bodys = static.get_statious()
     static.nomalization_statious()
     bodys = static.get_statious()
@@ -20,6 +19,7 @@ def main():
     # to select models // 0 = Mediapipe // 1 = movenet
     model_count = [0]
     clock = pygame.time.Clock()
+
     curent_screen = interface.main_screen(screen, body)
     screen_stack.append(curent_screen)
     while True:
@@ -29,19 +29,19 @@ def main():
                 pygame.quit()
                 sys.exit()
 
-        if event.type == KEYUP:
-            if (
-                event.key == K_ESCAPE
-                and curent_screen.return_screen() != "setting"
-                and curent_screen.return_screen() != "model_select"
-            ):
-                if curent_screen.return_screen() == "Static":
-                    curent_screen = screen_stack.pop()
-                    curent_screen.move_interface_flag = False
-                else:
-                    screen_stack.append(curent_screen)
-                    curent_screen = interface.setting_screen(screen, body)
-                curent_screen.handle_event(event)
+            if event.type == KEYUP:
+                if (
+                    event.key == K_ESCAPE
+                    and curent_screen.return_screen() != "setting"
+                    and curent_screen.return_screen() != "model_select"
+                ):
+                    if curent_screen.return_screen() == "Static":
+                        curent_screen = screen_stack.pop()
+                        curent_screen.move_interface_flag = False
+                    else:
+                        screen_stack.append(curent_screen)
+                        curent_screen = interface.setting_screen(screen, body)
+            curent_screen.handle_event(event)
         curent_screen.update()
         curent_screen.draw()
         if curent_screen.move_interface():
