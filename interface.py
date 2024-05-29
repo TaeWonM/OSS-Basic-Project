@@ -133,3 +133,35 @@ class fight_screen:
         # model class variable
         self.model = None
         self.bodys = bodys
+
+    # This is a method to handle events
+    # In this method, Catch direction key to implement pose detection models
+    def handle_event(self, event):
+        # if statement to detect model changes
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                self.select_cout -= 1
+            if event.key == pygame.K_RIGHT:
+                self.select_cout += 1
+        # if statement to run pose detection models
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_RETURN:
+                if self.Thread1 != None and self.Thread1.is_alive():
+                    pass
+                else:
+                    if self.model_count[0] == 0:
+                        self.model = MediaPipe.MediaPipe()
+                        self.Thread1 = threading.Thread(
+                            target=self.model.run,
+                            args=[self.select_cout - 2],
+                            daemon=True,
+                        )
+                        self.Thread1.start()
+                    else:
+                        self.model = MoveNet.Movenet()
+                        self.Thread1 = threading.Thread(
+                            target=self.model.run,
+                            args=[self.select_cout - 2],
+                            daemon=True,
+                        )
+                        self.Thread1.start()
