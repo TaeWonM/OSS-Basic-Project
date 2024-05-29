@@ -19,7 +19,7 @@ class Player(pygame.sprite.Sprite):
         # variable to check frames how much they move
         self.movement_count = 0
 
-    # This is a method to make player's movements
+    # This is a method to make player's movements dynamically
     def move_img(self):
         if self.movement_count >= 5:
             self.movement_count -= 5
@@ -40,3 +40,17 @@ class Player(pygame.sprite.Sprite):
                     self.image = pygame.image.load("charactor3.png").convert_alpha()
         else:
             self.movement_count += 1
+
+    # This is a method to make player's movements with player's hit box
+    def move(self, to_x, to_y):
+        self.rect.x += to_x
+        self.rect.y += to_y
+        if self.rect.x < 0:
+            self.rect.x = 0
+        elif self.rect.x > window_width - self.rect.size[0]:
+            self.rect.x = window_width - self.rect.size[0]
+
+        if self.rect.y < 0:
+            self.rect.y = 0
+        elif self.rect.y > window_height - self.rect.size[1]:
+            self.rect.y = window_height - self.rect.size[1]
