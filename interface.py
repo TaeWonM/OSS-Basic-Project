@@ -98,7 +98,7 @@ class main_screen:
         return "main"
 
 
-# The class for main interface
+# The class for fight interface
 # It contains Enemys and players
 # Also, It has parameters screen, bodys, enemy, model_count, bodys, enemy_index
 # Screen is a pygame object, and it is a object to display game
@@ -254,3 +254,21 @@ class fight_screen:
     # This is method to find what current screen is in
     def return_screen(self):
         return "fight"
+
+
+# The class for setting interface
+# It contains setting blocks
+# Also, It has parameters screen, bodys
+class setting_screen:
+    def __init__(self, screen, bodys):
+        self.screen = screen
+        # variable that contains setting image
+        self.image = pygame.image.load("Setting.png")
+        # variable for check what button have chosen
+        self.select_cout = 0
+        # variable that contains selection blocks
+        self.select_button = container.setting_container()
+        self.move_interface_flag = False
+        # variable that contains what screen to move
+        self.move_screen = ""
+        self.bodys = bodys
