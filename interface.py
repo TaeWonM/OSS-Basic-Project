@@ -450,3 +450,86 @@ class statistics_screen:
             self.select_cout = 0
         elif self.select_cout > 1:
             self.select_cout = 1
+
+    # This is method to draw interface objects and strings
+    def draw(self):
+        self.screen.blit(self.img, (0, 0))
+        for i in range(0, 2):
+            if i == self.select_cout:
+                pygame.draw.rect(self.screen, (255, 0, 0), self.container[i])
+            else:
+                pygame.draw.rect(self.screen, (0, 0, 0), self.container[i])
+        i = self.max_index[self.screen_count]
+        line = 0
+        while i < len(self.bodys) and line <= 5:
+            k = dt.datetime(
+                self.bodys[i]["year"], self.bodys[i]["month"], self.bodys[i]["day"]
+            )
+            rect = pygame.Rect(200 + line * 130, 180 + 82 * k.weekday(), 24, 24)
+            pygame.draw.rect(
+                self.screen,
+                (
+                    (
+                        self.bodys[i]["Upper_body"]
+                        if self.bodys[i]["Upper_body"] <= 255
+                        else 255
+                    ),
+                    (
+                        self.bodys[i]["Lower_body"]
+                        if self.bodys[i]["Lower_body"] <= 255
+                        else 255
+                    ),
+                    0,
+                ),
+                rect,
+            )
+            i += 1
+            if k.weekday() == 6:
+                line += 1
+            k += dt.timedelta(days=1)
+        if i < len(self.bodys):
+            if self.screen_count + 1 == len(self.max_index):
+                self.max_index.append(i)
+        mx, my = pygame.mouse.get_pos()
+        i = self.max_index[self.screen_count]
+        index = None
+        line = 0
+        while i < len(self.bodys) and line <= 7:
+            k = dt.datetime(
+                self.bodys[i]["year"], self.bodys[i]["month"], self.bodys[i]["day"]
+            )
+            if (
+                mx >= 200 + line * 130
+                and mx <= 224 + line * 130
+                and my >= 180 + 82 * k.weekday()
+                and my <= 204 + 82 * k.weekday()
+            ):
+                index = self.bodys[i]
+                break
+            i += 1
+            if k.weekday() == 6:
+                line += 1
+            k += dt.timedelta(days=1)
+        if index != None:
+            self.screen.blit(
+                self.font.render(
+                    str(index["year"])
+                    + "/"
+                    + str(index["month"])
+                    + "/"
+                    + str(index["day"])
+                    + " : "
+                    + "Upper body = "
+                    + str(index["Upper_body"])
+                    + ", Lower body = "
+                    + str(index["Lower_body"]),
+                    False,
+                    (0, 0, 0),
+                ),
+                (60, 30),
+            )
+        else:
+            self.screen.blit(
+                self.font.render("", True, (0, 0, 0)),
+                (30, 30),
+            )
