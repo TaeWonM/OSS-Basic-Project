@@ -28,8 +28,7 @@ def main():
                 static.set_statious(body)
                 pygame.quit()
                 sys.exit()
-        pygame.display.update()
-        clock.tick(60)
+
         if event.type == KEYUP:
             if (
                 event.key == K_ESCAPE
@@ -59,6 +58,17 @@ def main():
                             curent_screen = interface.model_select_screen(
                                 screen, model_count
                             )
+                        case "main":
+                            screen_stack.append(curent_screen)
+                            curent_screen = interface.fight_screen(
+                                screen,
+                                curent_screen.enemy,
+                                model_count,
+                                body,
+                                curent_screen.enemy_index,
+                            )
+        pygame.display.update()
+        clock.tick(60)
 
 
 if __name__ == "__main__":
