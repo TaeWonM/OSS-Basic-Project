@@ -10,7 +10,7 @@ class Player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         # variable that contains player image
         self.image = pygame.image.load("charactor1.png").convert_alpha()
-        # variable that contains player's size
+        # variable that contains player's hit box
         self.rect = self.image.get_rect()
         # variable that contains player's movement while player moves
         self.movement = 0
@@ -54,3 +54,21 @@ class Player(pygame.sprite.Sprite):
             self.rect.y = 0
         elif self.rect.y > window_height - self.rect.size[1]:
             self.rect.y = window_height - self.rect.size[1]
+
+
+# The class for Enemy
+# It contains setting blocks and Enemy's movements
+# Also, It has no parameters
+class Enemy(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        # variable that contains enemy image
+        self.image = pygame.image.load("Enemy_up-1.png").convert_alpha()
+        # variable that contains enemy's hit box
+        self.rect = self.image.get_rect()
+        # variable that contains player's movement while player moves
+        self.movement = 0
+        # variable to check frames how much they move
+        self.movement_count = 0
+        # variable to check player's movements
+        self.movement_flag = True
