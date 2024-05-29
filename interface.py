@@ -93,7 +93,7 @@ class main_screen:
     def move_interface(self):
         return self.move_interface_flag
 
-    # This is method to find what current screnn is in
+    # This is method to find what current screen is in
     def return_screen(self):
         return "main"
 
@@ -190,3 +190,67 @@ class fight_screen:
             self.select_cout = 3
         self.enemy.move_img()
         pass
+
+    # This is method to draw interface objects and strings
+    def draw(self):
+        # Draw fight_ground_image
+        self.screen.blit(self.fight_ground_image, [0, 0])
+        # Draw fight_interface
+        self.screen.blit(self.fight_interface, [0, 0])
+        # Draw enemy image
+        self.screen.blit(
+            self.enemy.image,
+            [
+                (window_width / 2) - (self.enemy.rect.size[0] / 2),
+                (window_height / 2) - (self.enemy.rect.size[1] / 2) - 45,
+            ],
+        )
+        # Draw heart blocks
+        for i in range(0, 2):
+            pygame.draw.rect(
+                self.screen, (255, 0, 0), self.fight_container[i].left_heart
+            )
+            pygame.draw.rect(
+                self.screen, (0, 0, 0), self.fight_container[i].attacked_heart
+            )
+        # Draw selection blocks
+        for i in range(2, 4):
+            if self.select_cout == i:
+                pygame.draw.rect(self.screen, (255, 0, 0), self.fight_container[i])
+            else:
+                pygame.draw.rect(self.screen, (0, 0, 0), self.fight_container[i])
+        # Draw heart status
+        self.screen.blit(
+            self.font.render(
+                str(self.fight_container[1].cur_heart)
+                + "/"
+                + str(self.fight_container[1].max_heart),
+                False,
+                (0, 0, 0),
+            ),
+            [
+                self.fight_container[1].left + self.fight_container[1].width + 5,
+                self.fight_container[1].top + 2,
+            ],
+        )
+        self.screen.blit(
+            self.font.render(
+                str(self.fight_container[0].cur_heart)
+                + "/"
+                + str(self.fight_container[0].max_heart),
+                False,
+                (0, 0, 0),
+            ),
+            [
+                self.fight_container[0].left + self.fight_container[0].width + 5,
+                self.fight_container[0].top - 1,
+            ],
+        )
+
+    # This is method to draw background and other characters
+    def move_interface(self):
+        return self.move_interface_flag
+
+    # This is method to find what current screen is in
+    def return_screen(self):
+        return "fight"
