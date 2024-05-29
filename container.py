@@ -38,3 +38,17 @@ class heart:
         self.attacked_heart.left = (
             self.left + (self.cur_heart / self.max_heart) * self.width
         )
+
+
+# method that make fight blocks list
+def fight_container():
+    container = []
+    # 0,1:enemy_heart_bar 2,3: player_heart_bar 4,5:sports select
+    enemy_heart_bar = heart(412, 360, 200, 16, 100)
+    player_heart_bar = heart(200, 700, 540, 26, 100)
+    container.append(enemy_heart_bar)
+    container.append(player_heart_bar)
+
+    container.append(pygame.Rect(120, 830, 32, 32))
+    container.append(pygame.Rect(580, 830, 32, 32))
+    return container
