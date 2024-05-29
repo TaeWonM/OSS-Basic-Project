@@ -60,3 +60,11 @@ def model_select_container():
     container.append(pygame.Rect(270, 422, 32, 32))
     container.append(pygame.Rect(270, 724, 32, 32))
     return container
+
+
+# method that make screen select blocks list
+def static_container():
+    container = []
+    container.append(pygame.Rect(432, 104, 32, 32))
+    container.append(pygame.Rect(584, 104, 32, 32))
+    return container
