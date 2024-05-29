@@ -272,3 +272,30 @@ class setting_screen:
         # variable that contains what screen to move
         self.move_screen = ""
         self.bodys = bodys
+
+    # This is a method to handle events
+    # In this method, Catch direction key to change buttons
+    def handle_event(self, event):
+        # if statement to detect change buttons
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                self.select_cout -= 1
+            if event.key == pygame.K_DOWN:
+                self.select_cout += 1
+        # if statement to detect Enter key to move other interface
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_RETURN:
+                match (self.select_cout):
+                    case 0:
+                        static.set_statious(self.bodys)
+                        pygame.quit()
+                        sys.exit()
+                    case 1:
+                        self.move_screen = "Static"
+                        self.move_interface_flag = True
+                    case 2:
+                        self.move_screen = "Model"
+                        self.move_interface_flag = True
+                    case 3:
+                        self.move_screen = "Return"
+                        self.move_interface_flag = True
