@@ -350,7 +350,7 @@ class model_select_screen:
     # This is a method to handle events
     # In this method, Catch direction key to change buttons
     def handle_event(self, event):
-        # if statement to detect change buttons
+        # if statement to detect change selections
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 self.select_cout -= 1
@@ -422,3 +422,23 @@ class statistics_screen:
         self.select_cout = 0
         # variable that contains selection blocks
         self.container = container.static_container()
+
+    # This is a method to handle events
+    # In this method, Catch direction key to change buttons
+    def handle_event(self, event):
+        # if statement to detect change selections
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                self.select_cout -= 1
+            if event.key == pygame.K_RIGHT:
+                self.select_cout += 1
+        # if statement to detect Enter key to change screen
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_RETURN:
+                match (self.select_cout):
+                    case 0:
+                        if self.screen_count != 0:
+                            self.screen_count -= 1
+                    case 1:
+                        if self.screen_count + 1 < len(self.max_index):
+                            self.screen_count += 1
