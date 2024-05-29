@@ -299,3 +299,12 @@ class setting_screen:
                     case 3:
                         self.move_screen = "Return"
                         self.move_interface_flag = True
+
+    # This method handles variables by many situations
+    def update(self):
+        # In this if statement, adjust the wrong values
+        if self.select_cout <= 0:
+            self.select_cout = 0
+        elif self.select_cout >= 3:
+            self.select_cout = 3
+        pass
