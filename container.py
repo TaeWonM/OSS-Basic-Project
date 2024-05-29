@@ -26,6 +26,15 @@ class heart:
         self.left_heart = pygame.Rect(left, top, width, height)
         # variable to make attacked heart block
         self.attacked_heart = pygame.Rect(left + width, top, 0, height)
-        # variable how much heart they have
+        # variable that contains how much heart they have
         self.max_heart = max_
         self.cur_heart = max_
+
+    # method that adjusts heart block when attacked
+    def attacked(self, damage):
+        self.cur_heart -= damage
+        self.left_heart.width = (self.cur_heart / self.max_heart) * self.width
+        self.attacked_heart.width = (1 - self.cur_heart / self.max_heart) * self.width
+        self.attacked_heart.left = (
+            self.left + (self.cur_heart / self.max_heart) * self.width
+        )
