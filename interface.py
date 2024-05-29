@@ -374,3 +374,26 @@ class model_select_screen:
             self.select_cout = 0
         elif self.select_cout >= 1:
             self.select_cout = 1
+
+    # This is method to draw interface objects and strings
+    def draw(self):
+        self.screen.blit(self.image, [0, 0])
+        for i in range(0, 2):
+            if i == self.select_cout:
+                pygame.draw.rect(self.screen, (255, 0, 0), self.select_button[i])
+            else:
+                pygame.draw.rect(self.screen, (0, 0, 0), self.select_button[i])
+        self.screen.blit(
+            self.font.render(
+                "Curent Model : " + str(self.model[self.select_cout]), False, (0, 0, 0)
+            ),
+            [202, 880],
+        )
+
+    # This is method to draw background and other characters
+    def move_interface(self):
+        return self.move_interface_flag
+
+    # This is method to find what current screen is in
+    def return_screen(self):
+        return "model_select"
