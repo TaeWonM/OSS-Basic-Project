@@ -45,6 +45,20 @@ def main():
                 curent_screen.handle_event(event)
         curent_screen.update()
         curent_screen.draw()
+        if curent_screen.move_interface():
+            match (curent_screen.return_screen()):
+                case "setting":
+                    match (curent_screen.move_screen):
+                        case "Static":
+                            screen_stack.append(curent_screen)
+                            curent_screen = interface.statistics_screen(screen, bodys)
+                        case "Return":
+                            curent_screen = screen_stack.pop()
+                        case "Model":
+                            screen_stack.append(curent_screen)
+                            curent_screen = interface.model_select_screen(
+                                screen, model_count
+                            )
 
 
 if __name__ == "__main__":
