@@ -30,6 +30,18 @@ def main():
                 sys.exit()
         pygame.display.update()
         clock.tick(60)
+        if event.type == KEYUP:
+            if (
+                event.key == K_ESCAPE
+                and curent_screen.return_screen() != "setting"
+                and curent_screen.return_screen() != "model_select"
+            ):
+                if curent_screen.return_screen() == "Static":
+                    curent_screen = screen_stack.pop()
+                    curent_screen.move_interface_flag = False
+                else:
+                    screen_stack.append(curent_screen)
+                    curent_screen = interface.setting_screen(screen, body)
 
 
 if __name__ == "__main__":
