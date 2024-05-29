@@ -24,7 +24,7 @@ class main_screen:
         # variables to make movments
         self.to_x = 0
         self.to_y = 0
-        # variable to Contains Player's movement
+        # variable that contains Player's movement
         self.player = Charactor.Player()
         self.background_group = pygame.sprite.Group()
         # variable to move interface
@@ -96,3 +96,40 @@ class main_screen:
     # This is method to find what current screnn is in
     def return_screen(self):
         return "main"
+
+
+# The class for main interface
+# It contains Enemys and players
+# Also, It has parameters screen, bodys, enemy, model_count, bodys, enemy_index
+# Screen is a pygame object, and it is a object to display game
+# body is a dictionary it contains date, month, year and record
+# model_count is a important variable to find what model have chosen
+class fight_screen:
+    def __init__(self, screen, enemy, model_count, bodys, enemy_index):
+        self.screen = screen
+        # variable that contains ground image
+        self.fight_ground_image = pygame.image.load("grass_fight_ground.png")
+        # variable that contains selection image while fight
+        self.fight_interface = pygame.image.load("fight_selection.png")
+        # variable that contains what enemy the player was crashed
+        self.enemy_index = enemy_index
+        # variable that contains all enemys
+        self.enemys = enemy
+        self.enemy = enemy[enemy_index]
+
+        self.move_interface_flag = False
+        # variable for check what button have chosen
+        self.select_cout = 2
+        # variable that contains fight blocks
+        # 0 : enemy heart bar, 1 : player heart bar
+        # 2, 3 : check buttons
+        self.fight_container = container.fight_container()
+        # self.fight_container[0].attacked(90)
+        # This contains font style
+        self.font = pygame.font.SysFont(None, 40)
+        self.model_count = model_count
+        # Thread variable
+        self.Thread1 = None
+        # model class variable
+        self.model = None
+        self.bodys = bodys
