@@ -107,3 +107,7 @@ class Enemy(pygame.sprite.Sprite):
                 self.movement_flag = True
         else:
             self.movement_count += 1
+
+    # This is a method to make for match player class
+    def move(self):
+        pass
