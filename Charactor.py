@@ -66,9 +66,44 @@ class Enemy(pygame.sprite.Sprite):
         self.image = pygame.image.load("Enemy_up-1.png").convert_alpha()
         # variable that contains enemy's hit box
         self.rect = self.image.get_rect()
-        # variable that contains player's movement while player moves
+        # variable that contains enemy's movement while player moves
         self.movement = 0
         # variable to check frames how much they move
         self.movement_count = 0
-        # variable to check player's movements
+        # variable to check enemy's movements
         self.movement_flag = True
+
+    # This is a method to make enemy's movements dynamically
+    def move_img(self):
+        if self.movement_count >= 5:
+            self.movement_count -= 5
+            if self.movement_flag:
+                match (self.movement):
+                    case 0:
+                        self.image = pygame.image.load("Enemy_up-1.png").convert_alpha()
+                    case 1:
+                        self.image = pygame.image.load("Enemy_up-2.png").convert_alpha()
+                    case 2:
+                        self.image = pygame.image.load("Enemy_up-3.png").convert_alpha()
+                self.movement += 1
+            else:
+                match (self.movement):
+                    case 0:
+                        self.image = pygame.image.load(
+                            "Enemy_down-1.png"
+                        ).convert_alpha()
+                    case 1:
+                        self.image = pygame.image.load(
+                            "Enemy_down-2.png"
+                        ).convert_alpha()
+                    case 2:
+                        self.image = pygame.image.load(
+                            "Enemy_down-3.png"
+                        ).convert_alpha()
+                self.movement -= 1
+            if self.movement >= 2:
+                self.movement_flag = False
+            elif self.movement <= 0:
+                self.movement_flag = True
+        else:
+            self.movement_count += 1
