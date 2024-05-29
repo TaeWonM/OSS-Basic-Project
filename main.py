@@ -42,6 +42,9 @@ def main():
                 else:
                     screen_stack.append(curent_screen)
                     curent_screen = interface.setting_screen(screen, body)
+                curent_screen.handle_event(event)
+        curent_screen.update()
+        curent_screen.draw()
 
 
 if __name__ == "__main__":
