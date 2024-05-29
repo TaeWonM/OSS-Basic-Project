@@ -59,3 +59,25 @@ class main_screen:
                 self.to_x = 0
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                 self.to_y = 0
+
+    # This method handles variables by many situations
+
+    def update(self):
+        # This is the part of movement for changing player's images while player are moving
+        if self.to_x != 0 or self.to_y != 0:
+            self.player.move_img()
+            self.player.move(self.to_x, self.to_y)
+        # This is the part of checking crash between player and enemy
+        for i in range(0, len(self.enemy)):
+            self.enemy[i].move_img()
+            if self.player.rect.colliderect(self.enemy[i].rect):
+                self.move_interface_flag = True
+                self.enemy_index = i
+        # This is the part of adding enemys if all enemys are eliminated
+        if len(self.enemy) == 0:
+            num = random.randint(4, 21)
+            for i in range(0, num):
+                enemy = Charactor.Enemy()
+                enemy.rect.x = random.randint(0, 988)
+                enemy.rect.y = random.randint(0, 988)
+                self.enemy.append(enemy)
