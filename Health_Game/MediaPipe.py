@@ -3,6 +3,9 @@
 import cv2
 import math
 import mediapipe as mp
+import pyautogui
+import threading
+import time
 
 
 class MediaPipe:
@@ -170,14 +173,40 @@ class MediaPipe:
                     if self.right_push_up(
                         result_list, self.movecount, self.status
                     ) and self.right_push_up(result_list, self.movecount, self.status):
-                        print("No Push_up pose detected")
+                        if self.danger_massage[1] == False:
+                            self.danger_massage_flag[1] = False
+                            thread1 = threading.Thread(
+                                target=self.message_box,
+                                args=[
+                                    "Necessary poses to detect push_up are not detected",
+                                    1,
+                                ],
+                                daemon=True,
+                            )
+                            thread1.start()
+                            self.danger_massage[1] = True
+                    else:
+                        self.danger_massage_flag[1] = True
                 if pose_num == 1:
                     if self.right_sqaut(
                         result_list, self.movecount, self.status
                     ) and self.left_sqaut(result_list, self.movecount, self.status):
-                        print("No sqaut pose detected")
+                        if self.danger_massage[1] == False:
+                            self.danger_massage_flag[1] = False
+                            thread1 = threading.Thread(
+                                target=self.message_box,
+                                args=[
+                                    "Necessary poses to detect sqaut are not detected",
+                                    1,
+                                ],
+                                daemon=True,
+                            )
+                            thread1.start()
+                            self.danger_massage[1] = True
+                    else:
+                        self.danger_massage_flag[1] = True
                 # Flip the image horizontally for a selfie-view display.
                 cv2.imshow("MediaPipe Pose", cv2.flip(image, 1))
-                if cv2.waitKey(1) & 0xFF == 27:
+                if cv2.waitKey(1) & 0xFF == 27 or self.kill_thread:
                     break
         cap.release()
