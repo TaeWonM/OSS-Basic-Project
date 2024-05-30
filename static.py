@@ -56,6 +56,7 @@ def get_statious():
 # This method write json file for recode
 # It contains times and exercise recodes
 def set_statious(data):
+    # variable that contains recodes which is in json file
     health_data = []
     with open("staticsitc.json", "r", encoding="utf-8-sig") as json_file:
         # if statement for checking same data and write json file into recode
@@ -69,3 +70,22 @@ def set_statious(data):
                 health_data[i] = data
     with open("staticsitc.json", "w", encoding="utf-8-sig") as json_file:
         json.dump(health_data, json_file, indent=4)
+
+
+# This method write json file for recode to write empty data
+# It contains times and exercise recodes
+def nomalization_statious():
+    # variable that contains recodes which is in json file
+    health_data = []
+    # statement to get recodes in staticsitc.json file
+    with open("staticsitc.json", "r", encoding="utf-8-sig") as json_file:
+        health_data = json.load(json_file)
+        first = dt.datetime(
+            year=health_data[0]["year"],
+            month=health_data[0]["month"],
+            day=health_data[0]["day"],
+        )
+        # variable to add one day frist recode
+        first = first + dt.timedelta(days=1)
+        # variable to check health_data's lengh
+        i = 1
