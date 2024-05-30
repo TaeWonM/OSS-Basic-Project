@@ -144,7 +144,22 @@ class MediaPipe:
                 elif stat[0] == 2 and ra <= 110:
                     stat[0] = 1
                     movecount[0] += 1
-                    print(movecount[0])
+                    self.attack_flag = True
+                else:
+                    if self.danger_massage[2] == False:
+                        self.danger_massage_flag[2] = False
+                        thread1 = threading.Thread(
+                            target=self.message_box,
+                            args=[
+                                "legs are not totaly set",
+                                1,
+                            ],
+                            daemon=True,
+                        )
+                        thread1.start()
+                        self.danger_massage[2] = True
+                    else:
+                        self.danger_massage_flag[2] = True
             return False
         except:
             return True
