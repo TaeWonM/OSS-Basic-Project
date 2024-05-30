@@ -11,7 +11,7 @@ class Rock(pygame.sprite.Sprite):
         self.grid_x = row * TILESIZE
         self.grid_y = col * TILESIZE
 
-        self.image = pygame.image.load("tile_rock.png").convert_alpha()
+        self.image = pygame.image.load("src\\tile_rock.png").convert_alpha()
         # create block for tile position
         self.rect = self.image.get_rect()
         # Add rock tile position
@@ -28,7 +28,7 @@ class Ground(pygame.sprite.Sprite):
         self.grid_x = row * TILESIZE
         self.grid_y = col * TILESIZE
         # variable for load image
-        self.image = pygame.image.load("tile_ground.png").convert_alpha()
+        self.image = pygame.image.load("src\\tile_ground.png").convert_alpha()
         self.rect = self.image.get_rect()
         # Add rock tile position
         self.rect.x = self.grid_x
@@ -38,7 +38,7 @@ class Ground(pygame.sprite.Sprite):
 # This mothod is for setting map
 # Game reads map.txt and add tiles into background
 def set_main_map(background_group):
-    map_file = "map.txt"
+    map_file = "src\\map.txt"
     map_data = []
 
     with open(map_file, "r") as file:
