@@ -24,3 +24,16 @@ def get_statious():
                     and health_data[i]["day"] == now.day
                 ):
                     flag = True
+        # statement to make current recode if it doesn't have current recode
+        if not flag:
+            with open("staticsitc.json", "w", encoding="utf-8-sig") as json_file:
+                temp_health_data = {
+                    "year": now.year,
+                    "month": now.month,
+                    "day": now.day,
+                    "Upper_body": 0,
+                    "Lower_body": 0,
+                }
+                health_data.append(temp_health_data)
+                json.dump(health_data, json_file, indent=4)
+        return health_data
