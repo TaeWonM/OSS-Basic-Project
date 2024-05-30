@@ -81,7 +81,7 @@ class Movenet:
                 ):
                     stat[0] = 1
                     movecount[0] += 1
-                    print(movecount[0])
+                    self.attack_flag = True
             return False
         else:
             return True
@@ -115,7 +115,7 @@ class Movenet:
                 ):
                     stat[0] = 1
                     movecount[0] += 1
-                    print(movecount[0])
+                    self.attack_flag = True
             return False
         else:
             return True
@@ -141,7 +141,7 @@ class Movenet:
                 elif stat[0] == 2 and ra <= 120:
                     stat[0] = 1
                     movecount[0] += 1
-                    print(movecount[0])
+                    self.attack_flag = True
             return False
         else:
             return True
@@ -167,7 +167,7 @@ class Movenet:
                 elif stat[0] == 2 and ra <= 120:
                     stat[0] = 1
                     movecount[0] += 1
-                    print(movecount[0])
+                    self.attack_flag = True
             return False
         else:
             return True
@@ -239,23 +239,52 @@ class Movenet:
                 keypoints,
                 scores,
             )
-            if self.right_push_up(
-                keypoints, movecount, status, scores, keypoint_score_th
-            ) and self.left_push_up(
-                keypoints, movecount, status, scores, keypoint_score_th
-            ):
-                print("No Push_up Pose detected", status[0])
-            if self.right_sqaut(
-                keypoints, movecount, status, scores, keypoint_score_th
-            ) and self.left_sqaut(
-                keypoints, movecount, status, scores, keypoint_score_th
-            ):
-                print("No Sqaut Pose detected")
-            key = cv.waitKey(1)
-            if key == 27:  # ESC
+            if pose_num == 0:
+                if self.right_push_up(
+                    keypoints, self.movecount, self.status, scores, keypoint_score_th
+                ) and self.left_push_up(
+                    keypoints, self.movecount, self.status, scores, keypoint_score_th
+                ):
+                    if self.danger_massage[1] == False:
+                        self.danger_massage_flag[1] = False
+                        thread1 = threading.Thread(
+                            target=self.message_box,
+                            args=[
+                                "Necessary poses to detect push_up are not detected",
+                                1,
+                            ],
+                            daemon=True,
+                        )
+                        thread1.start()
+                        self.danger_massage[1] = True
+                    else:
+                        self.danger_massage_flag[1] = True
+            if pose_num == 1:
+                if self.right_sqaut(
+                    keypoints, self.movecount, self.status, scores, keypoint_score_th
+                ) and self.left_sqaut(
+                    keypoints, self.movecount, self.status, scores, keypoint_score_th
+                ):
+                    if self.danger_massage[1] == False:
+                        self.danger_massage_flag[1] = False
+                        thread1 = threading.Thread(
+                            target=self.message_box,
+                            args=[
+                                "Necessary poses to detect sqaut are not detected",
+                                1,
+                            ],
+                            daemon=True,
+                        )
+                        thread1.start()
+                        self.danger_massage[1] = True
+                    else:
+                        self.danger_massage_flag[1] = True
+
+            if cv.waitKey(1) == 27 or self.kill_thread:  # ESC
+                cv.destroyAllWindows()
                 break
 
-            cv.imshow("MoveNet(singlepose) Demo", debug_image)
+            cv.imshow("MoveNet", debug_image)
 
         cap.release()
         cv.destroyAllWindows()
