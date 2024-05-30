@@ -233,3 +233,17 @@ class MediaPipe:
                 if cv2.waitKey(1) & 0xFF == 27 or self.kill_thread:
                     break
         cap.release()
+
+    def message_box(self, text, massages_flag):
+        thread2 = threading.Thread(
+            target=self.alert_message, args=[text, massages_flag], daemon=True
+        )
+        thread2.start()
+        while self.danger_massage_flag[massages_flag] == False:
+            time.sleep(1)
+        pyautogui.press("enter")
+        self.danger_massage[massages_flag] = False
+
+    def alert_message(self, text, massages_flag):
+        pyautogui.alert(text)
+        self.danger_massage_flag[massages_flag] = True
