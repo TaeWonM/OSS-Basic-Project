@@ -51,3 +51,21 @@ def get_statious():
             health_data.append(temp_health_data)
             json.dump(health_data, json_file, indent=4)
             return health_data
+
+
+# This method write json file for recode
+# It contains times and exercise recodes
+def set_statious(data):
+    health_data = []
+    with open("staticsitc.json", "r", encoding="utf-8-sig") as json_file:
+        # if statement for checking same data and write json file into recode
+        health_data = json.load(json_file)
+        for i in range(0, len(health_data)):
+            if (
+                health_data[i]["year"] == data["year"]
+                and health_data[i]["month"] == data["month"]
+                and health_data[i]["day"] == data["day"]
+            ):
+                health_data[i] = data
+    with open("staticsitc.json", "w", encoding="utf-8-sig") as json_file:
+        json.dump(health_data, json_file, indent=4)
