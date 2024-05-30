@@ -18,7 +18,7 @@ class MediaPipe:
         self.kill_thread = False
         self.attack_flag = False
 
-    def setdict(self, result, image):
+    def setdict(self, result, image, danger_massage):
         l = []
         image_height, image_width, _ = image
         try:
@@ -32,7 +32,15 @@ class MediaPipe:
                     d["y"] = y
                 l.append(d)
         except:
-            print()
+            if danger_massage[0] == False:
+                self.danger_massage_flag[0] = False
+                thread1 = threading.Thread(
+                    target=self.message_box,
+                    args=["None of poses are not detected", 0],
+                    daemon=True,
+                )
+                thread1.start()
+                self.danger_massage[0] = True
         return l
 
     def radian(self, one, center, two):
