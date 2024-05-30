@@ -11,7 +11,7 @@ def get_statious():
     health_data = []
     # variable to check current date
     flag = False
-    #Add try statement for exception 
+    # Add try statement for exception
     try:
         # statement to open staticsitc.json file
         with open("staticsitc.json", "r", encoding="utf-8-sig") as json_file:
@@ -37,3 +37,17 @@ def get_statious():
                 health_data.append(temp_health_data)
                 json.dump(health_data, json_file, indent=4)
         return health_data
+    # exception will be occured by having no data in staticsitc.json file
+    except:
+        # Add new recode for frist starters
+        with open("staticsitc.json", "w", encoding="utf-8-sig") as json_file:
+            temp_health_data = {
+                "year": now.year,
+                "month": now.month,
+                "day": now.day,
+                "Upper_body": 0,
+                "Lower_body": 0,
+            }
+            health_data.append(temp_health_data)
+            json.dump(health_data, json_file, indent=4)
+            return health_data
