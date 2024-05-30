@@ -92,15 +92,43 @@ class MediaPipe:
                 ra = self.radian(result_list[12], result_list[14], result_list[16])
                 if ra <= 200 and ra >= 155:
                     stat[0] = 2
-                elif (
-                    stat[0] == 2
-                    and ra <= 130
-                    and self.radian(result_list[12], result_list[24], result_list[26])
-                    > 145
-                ):
-                    stat[0] = 1
-                    movecount[0] += 1
-                    print(movecount[0])
+                    if self.danger_massage[2] == False:
+                        self.danger_massage_flag[2] = False
+                        thread1 = threading.Thread(
+                            target=self.message_box,
+                            args=[
+                                "Arms are not totaly set",
+                                1,
+                            ],
+                            daemon=True,
+                        )
+                        thread1.start()
+                        self.danger_massage[2] = True
+                    else:
+                        self.danger_massage_flag[2] = True
+                elif stat[0] == 2 and ra <= 130:
+                    if (
+                        self.radian(result_list[12], result_list[24], result_list[26])
+                        > 145
+                    ):
+                        stat[0] = 1
+                        movecount[0] += 1
+                        self.attack_flag = True
+                    else:
+                        if self.danger_massage[2] == False:
+                            self.danger_massage_flag[2] = False
+                            thread1 = threading.Thread(
+                                target=self.message_box,
+                                args=[
+                                    "legs are not totaly set",
+                                    1,
+                                ],
+                                daemon=True,
+                            )
+                            thread1.start()
+                            self.danger_massage[2] = True
+                        else:
+                            self.danger_massage_flag[2] = True
             return False
         except:
             return True
