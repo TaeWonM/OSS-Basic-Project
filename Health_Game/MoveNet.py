@@ -203,7 +203,7 @@ class Movenet:
         return keypoints, scores
 
     # main Method
-    def main(self, pose_num):
+    def run(self, pose_num):
 
         mirror = True
         keypoint_score_th = 0.3
@@ -286,3 +286,17 @@ class Movenet:
                 cv.circle(debug_image, keypoint, 3, (0, 0, 0), -1)
 
         return debug_image
+
+    def message_box(self, text, massages_flag):
+        thread2 = threading.Thread(
+            target=self.alert_message, args=[text, massages_flag], daemon=True
+        )
+        thread2.start()
+        while self.danger_massage_flag[massages_flag] == False:
+            time.sleep(1)
+        pyautogui.press("enter")
+        self.danger_massage[massages_flag] = False
+
+    def alert_message(self, text, massages_flag):
+        pyautogui.alert(text)
+        self.danger_massage_flag[massages_flag] = True
