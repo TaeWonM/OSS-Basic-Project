@@ -134,3 +134,20 @@ class tests(unittest.TestCase):
         Sinterface.select_cout = 4
         Sinterface.update()
         Sinterface.draw()
+
+    def test_model_main(self):
+        pygame.init()
+        screen = pygame.display.set_mode(
+            (variable.window_height, variable.window_width)
+        )
+        pygame.display.set_caption("H.G")
+        model = [0]
+        Minterface = interface.model_select_screen(screen, model)
+        Minterface.select_cout = -1
+        Minterface.update()
+        Minterface.select_cout = 4
+        Minterface.update()
+        self.assertEqual(Minterface.return_screen(), "model_select")
+        Minterface.move_interface_flag = True
+        self.assertTrue(Minterface.move_interface())
+        Minterface.draw()
