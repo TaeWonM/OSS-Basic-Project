@@ -36,3 +36,22 @@ class tests(unittest.TestCase):
         static.set_statious(body[0])
         body = static.get_statious()
         static.nomalization_statious()
+
+    def test_character(self):
+        pygame.init()
+        screen = pygame.display.set_mode((64, 64))
+        player = Charactor.Player()
+        pygame.display.set_caption("H.G")
+
+        for i in range(1, 30):
+            player.move_img()
+        player.move(30, 30)
+        player.move(1000, 30)
+        player.move(-2000, 30)
+        player.move(0, -4000)
+        player.move(0, 3000)
+        enemy = Charactor.Enemy()
+
+        for i in range(1, 300):
+            enemy.move_img()
+        enemy.move()
