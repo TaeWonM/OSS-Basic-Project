@@ -151,3 +151,20 @@ class tests(unittest.TestCase):
         Minterface.move_interface_flag = True
         self.assertTrue(Minterface.move_interface())
         Minterface.draw()
+
+    def test_statistics_screen(self):
+        pygame.init()
+        screen = pygame.display.set_mode(
+            (variable.window_height, variable.window_width)
+        )
+        pygame.display.set_caption("H.G")
+        body = static.get_statious()
+        Sinterface = interface.statistics_screen(screen, body)
+        self.assertEqual(Sinterface.return_screen(), "Static")
+        Sinterface.move_interface_flag = True
+        self.assertTrue(Sinterface.move_interface())
+        Sinterface.select_cout = -1
+        Sinterface.update()
+        Sinterface.select_cout = 4
+        Sinterface.update()
+        Sinterface.draw()
