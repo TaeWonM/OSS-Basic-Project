@@ -16,3 +16,23 @@ from Health_Game import (
 import datetime as dt
 import json
 import pygame
+
+
+class tests(unittest.TestCase):
+    def test_static(self):
+        os.remove(sys.path[0] + "\\..\\src\\staticsitc.json")
+        body = static.get_statious()
+        with open(
+            sys.path[0] + "\\..\\src\\staticsitc.json", "w", encoding="utf-8-sig"
+        ) as json_file:
+            date = dt.datetime(body[0]["year"], body[0]["month"], body[0]["day"])
+            date -= dt.timedelta(days=2)
+            body[0]["year"] = date.year
+            body[0]["month"] = date.month
+            body[0]["day"] = date.day
+            json.dump(body, json_file, indent=4)
+        body = static.get_statious()
+        body[0]["Upper_body"] = 30
+        static.set_statious(body[0])
+        body = static.get_statious()
+        static.nomalization_statious()
