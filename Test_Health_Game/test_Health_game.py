@@ -117,3 +117,20 @@ class tests(unittest.TestCase):
         Finterface.update()
         self.assertEqual(Finterface.return_screen(), "fight")
         self.assertTrue(Finterface.move_interface())
+
+    def test_setting_main(self):
+        pygame.init()
+        screen = pygame.display.set_mode(
+            (variable.window_height, variable.window_width)
+        )
+        pygame.display.set_caption("H.G")
+        body = static.get_statious()
+        Sinterface = interface.setting_screen(screen, body)
+        self.assertEqual(Sinterface.return_screen(), "setting")
+        Sinterface.move_interface_flag = True
+        self.assertTrue(Sinterface.move_interface())
+        Sinterface.select_cout = -1
+        Sinterface.update()
+        Sinterface.select_cout = 4
+        Sinterface.update()
+        Sinterface.draw()
