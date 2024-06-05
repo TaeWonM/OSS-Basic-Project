@@ -168,3 +168,6 @@ class tests(unittest.TestCase):
         Sinterface.select_cout = 4
         Sinterface.update()
         Sinterface.draw()
+
+    def test_main(self):
+        main.main()
