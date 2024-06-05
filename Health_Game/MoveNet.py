@@ -11,9 +11,6 @@ import pyautogui
 import threading
 import time
 
-status = [0]
-movecount = [0]
-
 
 class Movenet:
     def __init__(self):
@@ -173,7 +170,7 @@ class Movenet:
             return True
 
     # Method to run models
-    def run_inference(model, input_size, image):
+    def run_inference(self, model, input_size, image):
         image_width, image_height = image.shape[1], image.shape[0]
 
         input_image = cv.resize(

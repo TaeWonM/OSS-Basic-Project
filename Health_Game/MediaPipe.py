@@ -71,7 +71,7 @@ class MediaPipe:
                             target=self.message_box,
                             args=[
                                 "Arms are not totaly set",
-                                1,
+                                2,
                             ],
                             daemon=True,
                         )
@@ -94,7 +94,7 @@ class MediaPipe:
                                 target=self.message_box,
                                 args=[
                                     "legs are not totaly set",
-                                    1,
+                                    2,
                                 ],
                                 daemon=True,
                             )
@@ -126,7 +126,7 @@ class MediaPipe:
                             target=self.message_box,
                             args=[
                                 "Arms are not totaly set",
-                                1,
+                                2,
                             ],
                             daemon=True,
                         )
@@ -149,7 +149,7 @@ class MediaPipe:
                                 target=self.message_box,
                                 args=[
                                     "legs are not totaly set",
-                                    1,
+                                    2,
                                 ],
                                 daemon=True,
                             )
@@ -186,7 +186,7 @@ class MediaPipe:
                             target=self.message_box,
                             args=[
                                 "legs are not totaly set",
-                                1,
+                                2,
                             ],
                             daemon=True,
                         )
@@ -223,7 +223,7 @@ class MediaPipe:
                             target=self.message_box,
                             args=[
                                 "legs are not totaly set",
-                                1,
+                                2,
                             ],
                             daemon=True,
                         )
@@ -262,7 +262,7 @@ class MediaPipe:
                     mp_pose.POSE_CONNECTIONS,
                     landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style(),
                 )
-                result_list = self.setdict(results, image.shape)
+                result_list = self.setdict(results, image.shape, self.danger_massage)
                 if pose_num == 0:
                     if self.right_push_up(
                         result_list, self.movecount, self.status
@@ -302,6 +302,7 @@ class MediaPipe:
                 # Flip the image horizontally for a selfie-view display.
                 cv2.imshow("MediaPipe Pose", cv2.flip(image, 1))
                 if cv2.waitKey(1) & 0xFF == 27 or self.kill_thread:
+                    cv2.destroyAllWindows()
                     break
         cap.release()
 
