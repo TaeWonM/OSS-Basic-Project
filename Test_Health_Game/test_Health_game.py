@@ -55,3 +55,10 @@ class tests(unittest.TestCase):
         for i in range(1, 300):
             enemy.move_img()
         enemy.move()
+
+    def test_container(self):
+        con = container.fight_container()
+        container.model_select_container()
+        container.static_container()
+        container.setting_container()
+        con[0].attacked(50)
