@@ -94,3 +94,26 @@ class tests(unittest.TestCase):
         Minterface.draw()
         for i in range(1, 70):
             Minterface.draw()
+
+    def test_fight_main(self):
+        pygame.init()
+        screen = pygame.display.set_mode(
+            (variable.window_height, variable.window_width)
+        )
+        pygame.display.set_caption("H.G")
+        body = static.get_statious()
+        enemy = []
+        enemy.append(Charactor.Enemy())
+        model = [0]
+        Finterface = interface.fight_screen(screen, enemy, model, body, 0)
+        Finterface.draw()
+        Finterface.fight_container[0].cur_heart = 0
+        Finterface.model = MediaPipe.MediaPipe()
+        Finterface.select_cout = 2
+        Finterface.model.attack_flag = True
+        Finterface.update()
+        Finterface.select_cout = 3
+        Finterface.model.attack_flag = True
+        Finterface.update()
+        self.assertEqual(Finterface.return_screen(), "fight")
+        self.assertTrue(Finterface.move_interface())
