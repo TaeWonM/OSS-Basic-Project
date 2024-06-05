@@ -62,3 +62,13 @@ class tests(unittest.TestCase):
         container.static_container()
         container.setting_container()
         con[0].attacked(50)
+
+    def test_set_map(self):
+        pygame.init()
+        screen = pygame.display.set_mode((64, 64))
+        player = Charactor.Player()
+        pygame.display.set_caption("H.G")
+        set_map.Rock(3, 4)
+        set_map.Ground(3, 4)
+        background_group = pygame.sprite.Group()
+        set_map.set_main_map(background_group)
