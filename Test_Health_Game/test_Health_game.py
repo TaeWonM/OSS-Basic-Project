@@ -72,3 +72,25 @@ class tests(unittest.TestCase):
         set_map.Ground(3, 4)
         background_group = pygame.sprite.Group()
         set_map.set_main_map(background_group)
+
+    def test_interface_main(self):
+        pygame.init()
+        screen = pygame.display.set_mode(
+            (variable.window_height, variable.window_width)
+        )
+        pygame.display.set_caption("H.G")
+        body = static.get_statious()
+        Minterface = interface.main_screen(screen, body)
+        self.assertEqual(Minterface.return_screen(), "main")
+        Minterface.move_interface_flag = True
+        self.assertTrue(Minterface.move_interface())
+        Minterface.enemy.append(Charactor.Enemy())
+        Minterface.draw()
+        Minterface.to_x = 1
+        Minterface.to_y = 2
+        Minterface.draw()
+        Minterface.to_x = 0
+        Minterface.to_y = 0
+        Minterface.draw()
+        for i in range(1, 70):
+            Minterface.draw()
