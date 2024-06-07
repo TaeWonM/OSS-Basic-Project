@@ -225,6 +225,19 @@ class tests(unittest.TestCase):
             (variable.window_height, variable.window_width)
         )
         pygame.display.set_caption("H.G")
+        os.remove(sys.path[0] + "\\..\\src\\staticsitc.json")
+        body = static.get_statious()
+        with open(
+            sys.path[0] + "\\..\\src\\staticsitc.json", "w", encoding="utf-8-sig"
+        ) as json_file:
+            date = dt.datetime(body[0]["year"], body[0]["month"], body[0]["day"])
+            date -= dt.timedelta(days=40)
+            body[0]["year"] = date.year
+            body[0]["month"] = date.month
+            body[0]["day"] = date.day
+            json.dump(body, json_file, indent=4)
+        body = static.get_statious()
+        static.nomalization_statious()
         body = static.get_statious()
         Sinterface = interface.statistics_screen(screen, body)
         self.assertEqual(Sinterface.return_screen(), "Static")
