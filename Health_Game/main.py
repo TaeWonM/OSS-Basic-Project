@@ -45,6 +45,7 @@ def main():
                         screen_stack.append(curent_screen)
                         curent_screen = interface.setting_screen(screen, body)
             curent_screen.handle_event(event)
+            pygame.event.clear()
         curent_screen.update()
         curent_screen.draw()
         if curent_screen.move_interface():
@@ -76,6 +77,8 @@ def main():
                     curent_screen.move_interface_flag = False
                     curent_screen.enemy[enemy_index].kill()
                     curent_screen.enemy.remove(curent_screen.enemy[enemy_index])
+                    curent_screen.to_x = 0
+                    curent_screen.to_y = 0
                 case "model_select":
                     curent_screen = screen_stack.pop()
                     curent_screen.move_interface_flag = False
