@@ -8,8 +8,17 @@
   2. After download, Please Set your Python path into environment variable.
   3. And Open Command command prompt.
   4. Then, Put This Sentence in termainal
-```pip install opencv-python```
-  6. Finally, Run Health_Game.py
+```sh
+  git clone ...........
+  cd OSS-Basic-Project
+  pip3 install-r requirements.txt
+```
+  6. Finally, Move directory to Health_Game. Then, Put This Sentence in termainal
+```sh
+  python main.py
+```
+# Game tips
+  1. Push-up pose capch
 # Member
   1. Min TaeWon [https://github.com/TaeWonM]
   2. Choi Yoonseo [https://github.com/Gorushi]
