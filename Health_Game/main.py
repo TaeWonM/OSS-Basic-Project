@@ -30,7 +30,7 @@ def main():
             if event.type == QUIT:
                 static.set_statious(body)
                 pygame.quit()
-                sys.exit()
+                sys.exit(1)
 
             if event.type == KEYUP:
                 if (

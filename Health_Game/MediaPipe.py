@@ -15,7 +15,6 @@ class MediaPipe:
         self.movecount = [0]
         self.danger_massage = [False, False, False]
         self.danger_massage_flag = [False, False, False]
-        self.kill_thread = False
         self.attack_flag = False
 
     def setdict(self, result, image, danger_massage):
@@ -31,6 +30,7 @@ class MediaPipe:
                     d["x"] = x
                     d["y"] = y
                 l.append(d)
+            self.danger_massage_flag[0] = True
         except:
             if danger_massage[0] == False:
                 self.danger_massage_flag[0] = False
@@ -77,31 +77,28 @@ class MediaPipe:
                         )
                         thread1.start()
                         self.danger_massage[2] = True
-                    else:
-                        self.danger_massage_flag[2] = True
                 elif stat[0] == 2 and ra <= 130:
+                    self.danger_massage_flag[2] = True
                     if (
                         self.radian(result_list[11], result_list[23], result_list[25])
                         > 145
                     ):
+                        self.danger_massage_flag[2] = True
                         stat[0] = 1
                         movecount[0] += 1
                         self.attack_flag = True
-                    else:
-                        if self.danger_massage[2] == False:
-                            self.danger_massage_flag[2] = False
-                            thread1 = threading.Thread(
-                                target=self.message_box,
-                                args=[
-                                    "legs are not totaly set",
-                                    2,
-                                ],
-                                daemon=True,
-                            )
-                            thread1.start()
-                            self.danger_massage[2] = True
-                        else:
-                            self.danger_massage_flag[2] = True
+                    elif self.danger_massage[2] == False:
+                        self.danger_massage_flag[2] = False
+                        thread1 = threading.Thread(
+                            target=self.message_box,
+                            args=[
+                                "legs are not totaly set",
+                                2,
+                            ],
+                            daemon=True,
+                        )
+                        thread1.start()
+                        self.danger_massage[2] = True
             return False
         except:
             return True
@@ -132,31 +129,28 @@ class MediaPipe:
                         )
                         thread1.start()
                         self.danger_massage[2] = True
-                    else:
-                        self.danger_massage_flag[2] = True
                 elif stat[0] == 2 and ra <= 130:
+                    self.danger_massage_flag[2] = True
                     if (
                         self.radian(result_list[12], result_list[24], result_list[26])
                         > 145
                     ):
+                        self.danger_massage_flag[2] = True
                         stat[0] = 1
                         movecount[0] += 1
                         self.attack_flag = True
-                    else:
-                        if self.danger_massage[2] == False:
-                            self.danger_massage_flag[2] = False
-                            thread1 = threading.Thread(
-                                target=self.message_box,
-                                args=[
-                                    "legs are not totaly set",
-                                    2,
-                                ],
-                                daemon=True,
-                            )
-                            thread1.start()
-                            self.danger_massage[2] = True
-                        else:
-                            self.danger_massage_flag[2] = True
+                    elif self.danger_massage[2] == False:
+                        self.danger_massage_flag[2] = False
+                        thread1 = threading.Thread(
+                            target=self.message_box,
+                            args=[
+                                "legs are not totaly set",
+                                2,
+                            ],
+                            daemon=True,
+                        )
+                        thread1.start()
+                        self.danger_massage[2] = True
             return False
         except:
             return True
@@ -176,24 +170,22 @@ class MediaPipe:
                 if ra >= 145:
                     stat[0] = 2
                 elif stat[0] == 2 and ra <= 110:
+                    self.danger_massage_flag[2] = True
                     stat[0] = 1
                     movecount[0] += 1
                     self.attack_flag = True
-                else:
-                    if self.danger_massage[2] == False:
-                        self.danger_massage_flag[2] = False
-                        thread1 = threading.Thread(
-                            target=self.message_box,
-                            args=[
-                                "legs are not totaly set",
-                                2,
-                            ],
-                            daemon=True,
-                        )
-                        thread1.start()
-                        self.danger_massage[2] = True
-                    else:
-                        self.danger_massage_flag[2] = True
+                elif stat[0] == 2 and self.danger_massage[2] == False:
+                    self.danger_massage_flag[2] = False
+                    thread1 = threading.Thread(
+                        target=self.message_box,
+                        args=[
+                            "legs are not totaly set",
+                            2,
+                        ],
+                        daemon=True,
+                    )
+                    thread1.start()
+                    self.danger_massage[2] = True
             return False
         except:
             return True
@@ -213,24 +205,22 @@ class MediaPipe:
                 if ra >= 145:
                     stat[0] = 2
                 elif stat[0] == 2 and ra <= 110:
+                    self.danger_massage_flag[2] = True
                     stat[0] = 1
                     movecount[0] += 1
                     self.attack_flag = True
-                else:
-                    if self.danger_massage[2] == False:
-                        self.danger_massage_flag[2] = False
-                        thread1 = threading.Thread(
-                            target=self.message_box,
-                            args=[
-                                "legs are not totaly set",
-                                2,
-                            ],
-                            daemon=True,
-                        )
-                        thread1.start()
-                        self.danger_massage[2] = True
-                    else:
-                        self.danger_massage_flag[2] = True
+                elif stat[0] == 2 and self.danger_massage[2] == False:
+                    self.danger_massage_flag[2] = False
+                    thread1 = threading.Thread(
+                        target=self.message_box,
+                        args=[
+                            "legs are not totaly set",
+                            2,
+                        ],
+                        daemon=True,
+                    )
+                    thread1.start()
+                    self.danger_massage[2] = True
             return False
         except:
             return True
@@ -266,7 +256,7 @@ class MediaPipe:
                 if pose_num == 0:
                     if self.right_push_up(
                         result_list, self.movecount, self.status
-                    ) and self.right_push_up(result_list, self.movecount, self.status):
+                    ) and self.left_push_up(result_list, self.movecount, self.status):
                         if self.danger_massage[1] == False:
                             self.danger_massage_flag[1] = False
                             thread1 = threading.Thread(
@@ -301,7 +291,9 @@ class MediaPipe:
                         self.danger_massage_flag[1] = True
                 # Flip the image horizontally for a selfie-view display.
                 cv2.imshow("MediaPipe Pose", cv2.flip(image, 1))
-                if cv2.waitKey(1) & 0xFF == 27 or self.kill_thread:
+                if cv2.waitKey(1) & 0xFF == 27:
+                    for i in range(0, 3):
+                        self.danger_massage_flag[i] = True
                     cv2.destroyAllWindows()
                     break
         cap.release()
@@ -313,7 +305,8 @@ class MediaPipe:
         thread2.start()
         while self.danger_massage_flag[massages_flag] == False:
             time.sleep(1)
-        pyautogui.press("enter")
+        while thread2.is_alive():
+            pyautogui.press("enter")
         self.danger_massage[massages_flag] = False
 
     def alert_message(self, text, massages_flag):
