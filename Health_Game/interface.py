@@ -80,7 +80,8 @@ class main_screen:
                 enemy = Charactor.Enemy()
                 enemy.rect.x = random.randint(0, 988)
                 enemy.rect.y = random.randint(0, 988)
-                self.enemy.append(enemy)
+                if not enemy.rect.colliderect(self.player.rect):
+                    self.enemy.append(enemy)
 
     # This is method to draw background and other characters
     def draw(self):
