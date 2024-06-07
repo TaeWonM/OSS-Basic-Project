@@ -1,5 +1,6 @@
+import sys
 import pygame
-from variable import window_height, window_width
+from Health_Game.variable import window_height, window_width
 
 
 # The class for Player
@@ -9,7 +10,9 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         # variable that contains player image
-        self.image = pygame.image.load("src\\charactor1.png").convert_alpha()
+        self.image = pygame.image.load(
+            sys.path[0] + "\\..\\src\\charactor1.png"
+        ).convert_alpha()
         # variable that contains player's hit box
         self.rect = self.image.get_rect()
         # variable that contains player's movement while player moves
@@ -34,15 +37,15 @@ class Player(pygame.sprite.Sprite):
             match (self.movement):
                 case 0:
                     self.image = pygame.image.load(
-                        "src\\charactor1.png"
+                        sys.path[0] + "\\..\\src\\charactor1.png"
                     ).convert_alpha()
                 case 1:
                     self.image = pygame.image.load(
-                        "src\\charactor2.png"
+                        sys.path[0] + "\\..\\src\\charactor2.png"
                     ).convert_alpha()
                 case 2:
                     self.image = pygame.image.load(
-                        "src\\charactor3.png"
+                        sys.path[0] + "\\..\\src\\charactor3.png"
                     ).convert_alpha()
         else:
             self.movement_count += 1
@@ -69,7 +72,9 @@ class Enemy(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         # variable that contains enemy image
-        self.image = pygame.image.load("src/Enemy_up-1.png").convert_alpha()
+        self.image = pygame.image.load(
+            sys.path[0] + "\\..\\src\\Enemy_up-1.png"
+        ).convert_alpha()
         # variable that contains enemy's hit box
         self.rect = self.image.get_rect()
         # variable that contains enemy's movement while player moves
@@ -87,30 +92,22 @@ class Enemy(pygame.sprite.Sprite):
                 match (self.movement):
                     case 0:
                         self.image = pygame.image.load(
-                            "src/Enemy_up-1.png"
+                            sys.path[0] + "\\..\\src\\Enemy_up-1.png"
                         ).convert_alpha()
                     case 1:
                         self.image = pygame.image.load(
-                            "src/Enemy_up-2.png"
-                        ).convert_alpha()
-                    case 2:
-                        self.image = pygame.image.load(
-                            "src/Enemy_up-3.png"
+                            sys.path[0] + "\\..\\src\\Enemy_up-2.png"
                         ).convert_alpha()
                 self.movement += 1
             else:
                 match (self.movement):
-                    case 0:
-                        self.image = pygame.image.load(
-                            "src/Enemy_down-1.png"
-                        ).convert_alpha()
                     case 1:
                         self.image = pygame.image.load(
-                            "src/Enemy_down-2.png"
+                            sys.path[0] + "\\..\\src\\Enemy_down-2.png"
                         ).convert_alpha()
                     case 2:
                         self.image = pygame.image.load(
-                            "src/Enemy_down-3.png"
+                            sys.path[0] + "\\..\\src\\Enemy_down-3.png"
                         ).convert_alpha()
                 self.movement -= 1
             if self.movement >= 2:

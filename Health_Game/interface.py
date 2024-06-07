@@ -1,14 +1,14 @@
 import pygame
-from variable import window_height, window_width
+from Health_Game.variable import window_height, window_width
 from pygame.locals import KEYUP
-import Charactor
-import set_map
-import container
+from Health_Game import Charactor
+from Health_Game import set_map
+from Health_Game import container
 import sys
 import threading
-import MediaPipe
-import MoveNet
-import static
+from Health_Game import MediaPipe
+from Health_Game import MoveNet
+from Health_Game import static
 import datetime as dt
 import random
 
@@ -108,9 +108,13 @@ class fight_screen:
     def __init__(self, screen, enemy, model_count, bodys, enemy_index):
         self.screen = screen
         # variable that contains ground image
-        self.fight_ground_image = pygame.image.load("src\\grass_fight_ground.png")
+        self.fight_ground_image = pygame.image.load(
+            sys.path[0] + "\\..\\src\\grass_fight_ground.png"
+        )
         # variable that contains selection image while fight
-        self.fight_interface = pygame.image.load("src\\fight_selection.png")
+        self.fight_interface = pygame.image.load(
+            sys.path[0] + "\\..\\src\\fight_selection.png"
+        )
         # variable that contains what enemy the player was crashed
         self.enemy_index = enemy_index
         # variable that contains all enemys
@@ -263,7 +267,7 @@ class setting_screen:
     def __init__(self, screen, bodys):
         self.screen = screen
         # variable that contains setting image
-        self.image = pygame.image.load("src\\Setting.png")
+        self.image = pygame.image.load(sys.path[0] + "\\..\\src\\Setting.png")
         # variable for check what button have chosen
         self.select_cout = 0
         # variable that contains selection blocks
@@ -335,7 +339,7 @@ class model_select_screen:
     def __init__(self, screen, model_count):
         self.screen = screen
         # variable that contains model select image
-        self.image = pygame.image.load("src\\change_model.png")
+        self.image = pygame.image.load(sys.path[0] + "\\..\\src\\change_model.png")
         # variable that contains what model have chosen before
         self.select_cout = model_count[0]
         self.model_count = model_count
@@ -408,7 +412,7 @@ class statistics_screen:
         self.bodys = body
         self.screen = screen
         # variable that contains statistics image
-        self.img = pygame.image.load("src\\statistics.png")
+        self.img = pygame.image.load(sys.path[0] + "\\..\\src\\statistics.png")
         self.move_interface_flag = False
         # statement to add updated exercise recode
         static.set_statious(body[len(body) - 1])

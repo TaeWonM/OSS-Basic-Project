@@ -1,9 +1,12 @@
 import pygame
 from pygame.locals import QUIT, KEYUP, K_ESCAPE
 import sys
-from variable import window_height, window_width
-import interface
-import static
+import os
+
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+from Health_Game.variable import window_height, window_width
+from Health_Game import interface
+from Health_Game import static
 
 
 def main():

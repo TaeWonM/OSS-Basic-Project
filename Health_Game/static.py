@@ -1,5 +1,6 @@
 import json
 import datetime as dt
+import sys
 
 
 # This method makes json file for recode
@@ -14,7 +15,9 @@ def get_statious():
     # Add try statement for exception
     try:
         # statement to open staticsitc.json file
-        with open("src\\staticsitc.json", "r", encoding="utf-8-sig") as json_file:
+        with open(
+            sys.path[0] + "\\..\\src\\staticsitc.json", "r", encoding="utf-8-sig"
+        ) as json_file:
             # statement to get recodes in staticsitc.json file and find current date
             health_data = json.load(json_file)
             for i in range(0, len(health_data)):
@@ -26,7 +29,9 @@ def get_statious():
                     flag = True
         # statement to make current recode if it doesn't have current recode
         if not flag:
-            with open("src\\staticsitc.json", "w", encoding="utf-8-sig") as json_file:
+            with open(
+                sys.path[0] + "\\..\\src\\staticsitc.json", "w", encoding="utf-8-sig"
+            ) as json_file:
                 temp_health_data = {
                     "year": now.year,
                     "month": now.month,
@@ -40,7 +45,9 @@ def get_statious():
     # exception will be occured by having no data in staticsitc.json file
     except:
         # Add new recode for frist starters
-        with open("src\\staticsitc.json", "w", encoding="utf-8-sig") as json_file:
+        with open(
+            sys.path[0] + "\\..\\src\\staticsitc.json", "w", encoding="utf-8-sig"
+        ) as json_file:
             temp_health_data = {
                 "year": now.year,
                 "month": now.month,
@@ -58,7 +65,9 @@ def get_statious():
 def set_statious(data):
     # variable that contains recodes which is in json file
     health_data = []
-    with open("src\\staticsitc.json", "r", encoding="utf-8-sig") as json_file:
+    with open(
+        sys.path[0] + "\\..\\src\\staticsitc.json", "r", encoding="utf-8-sig"
+    ) as json_file:
         # if statement for checking same data and write json file into recode
         health_data = json.load(json_file)
         for i in range(0, len(health_data)):
@@ -68,7 +77,9 @@ def set_statious(data):
                 and health_data[i]["day"] == data["day"]
             ):
                 health_data[i] = data
-    with open("src\\staticsitc.json", "w", encoding="utf-8-sig") as json_file:
+    with open(
+        sys.path[0] + "\\..\\src\\staticsitc.json", "w", encoding="utf-8-sig"
+    ) as json_file:
         json.dump(health_data, json_file, indent=4)
 
 
@@ -78,7 +89,9 @@ def nomalization_statious():
     # variable that contains recodes which is in json file
     health_data = []
     # statement to get recodes in staticsitc.json file
-    with open("src\\staticsitc.json", "r", encoding="utf-8-sig") as json_file:
+    with open(
+        sys.path[0] + "\\..\\src\\staticsitc.json", "r", encoding="utf-8-sig"
+    ) as json_file:
         health_data = json.load(json_file)
         first = dt.datetime(
             year=health_data[0]["year"],
@@ -108,5 +121,7 @@ def nomalization_statious():
             else:
                 first += dt.timedelta(days=1)
             i += 1
-    with open("src\\staticsitc.json", "w", encoding="utf-8-sig") as json_file:
+    with open(
+        sys.path[0] + "\\..\\src\\staticsitc.json", "w", encoding="utf-8-sig"
+    ) as json_file:
         json.dump(health_data, json_file, indent=4)
