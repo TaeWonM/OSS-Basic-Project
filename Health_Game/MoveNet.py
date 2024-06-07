@@ -36,8 +36,8 @@ class Movenet:
             [12, 14],
             [14, 16],
         ]
-        self.danger_massage = [False, False]
-        self.danger_massage_flag = [False, False]
+        self.danger_massage = [False, False, False]
+        self.danger_massage_flag = [False, False, False]
         self.kill_thread = False
         self.attack_flag = False
 
@@ -70,15 +70,39 @@ class Movenet:
                 ra = self.radian(result_list[5], result_list[7], result_list[9])
                 if ra <= 200 and ra >= 155:
                     stat[0] = 2
-                elif (
-                    stat[0] == 2
-                    and ra <= 150
-                    and self.radian(result_list[5], result_list[11], result_list[13])
-                    > 145
-                ):
-                    stat[0] = 1
-                    movecount[0] += 1
-                    self.attack_flag = True
+                    if self.danger_massage[2] == False:
+                        self.danger_massage_flag[2] = False
+                        thread1 = threading.Thread(
+                            target=self.message_box,
+                            args=[
+                                "Arms are not totaly set",
+                                2,
+                            ],
+                            daemon=True,
+                        )
+                        thread1.start()
+                        self.danger_massage[2] = True
+                elif stat[0] == 2 and ra <= 150:
+                    if (
+                        self.radian(result_list[5], result_list[11], result_list[13])
+                        > 145
+                    ):
+                        self.danger_massage_flag[2] = True
+                        stat[0] = 1
+                        movecount[0] += 1
+                        self.attack_flag = True
+                    elif self.danger_massage[2] == False:
+                        self.danger_massage_flag[2] = False
+                        thread1 = threading.Thread(
+                            target=self.message_box,
+                            args=[
+                                "legs are not totaly set",
+                                2,
+                            ],
+                            daemon=True,
+                        )
+                        thread1.start()
+                        self.danger_massage[2] = True
             return False
         else:
             return True
@@ -104,15 +128,40 @@ class Movenet:
                 ra = self.radian(result_list[6], result_list[8], result_list[10])
                 if ra <= 200 and ra >= 155:
                     stat[0] = 2
-                elif (
-                    stat[0] == 2
-                    and ra <= 150
-                    and self.radian(result_list[6], result_list[12], result_list[14])
-                    > 145
-                ):
-                    stat[0] = 1
-                    movecount[0] += 1
-                    self.attack_flag = True
+                    if self.danger_massage[2] == False:
+                        self.danger_massage_flag[2] = False
+                        thread1 = threading.Thread(
+                            target=self.message_box,
+                            args=[
+                                "Arms are not totaly set",
+                                2,
+                            ],
+                            daemon=True,
+                        )
+                        thread1.start()
+                        self.danger_massage[2] = True
+                elif stat[0] == 2 and ra <= 150:
+                    self.danger_massage_flag[2] = True
+                    if (
+                        self.radian(result_list[6], result_list[12], result_list[14])
+                        > 145
+                    ):
+                        self.danger_massage_flag[2] = True
+                        stat[0] = 1
+                        movecount[0] += 1
+                        self.attack_flag = True
+                    elif self.danger_massage[2] == False:
+                        self.danger_massage_flag[2] = False
+                        thread1 = threading.Thread(
+                            target=self.message_box,
+                            args=[
+                                "legs are not totaly set",
+                                2,
+                            ],
+                            daemon=True,
+                        )
+                        thread1.start()
+                        self.danger_massage[2] = True
             return False
         else:
             return True
@@ -136,9 +185,22 @@ class Movenet:
                 if ra >= 145:
                     stat[0] = 2
                 elif stat[0] == 2 and ra <= 120:
+                    self.danger_massage_flag[2] = True
                     stat[0] = 1
                     movecount[0] += 1
                     self.attack_flag = True
+                elif stat[0] == 2 and self.danger_massage[2] == False:
+                    self.danger_massage_flag[2] = False
+                    thread1 = threading.Thread(
+                        target=self.message_box,
+                        args=[
+                            "legs are not totaly set",
+                            2,
+                        ],
+                        daemon=True,
+                    )
+                    thread1.start()
+                    self.danger_massage[2] = True
             return False
         else:
             return True
@@ -162,9 +224,22 @@ class Movenet:
                 if ra >= 145:
                     stat[0] = 2
                 elif stat[0] == 2 and ra <= 120:
+                    self.danger_massage_flag[2] = True
                     stat[0] = 1
                     movecount[0] += 1
                     self.attack_flag = True
+                elif stat[0] == 2 and self.danger_massage[2] == False:
+                    self.danger_massage_flag[2] = False
+                    thread1 = threading.Thread(
+                        target=self.message_box,
+                        args=[
+                            "legs are not totaly set",
+                            2,
+                        ],
+                        daemon=True,
+                    )
+                    thread1.start()
+                    self.danger_massage[2] = True
             return False
         else:
             return True
@@ -254,8 +329,8 @@ class Movenet:
                         )
                         thread1.start()
                         self.danger_massage[1] = True
-                    else:
-                        self.danger_massage_flag[1] = True
+                else:
+                    self.danger_massage_flag[1] = True
             if pose_num == 1:
                 if self.right_sqaut(
                     keypoints, self.movecount, self.status, scores, keypoint_score_th
@@ -274,8 +349,8 @@ class Movenet:
                         )
                         thread1.start()
                         self.danger_massage[1] = True
-                    else:
-                        self.danger_massage_flag[1] = True
+                else:
+                    self.danger_massage_flag[1] = True
 
             if cv.waitKey(1) == 27 or self.kill_thread:  # ESC
                 cv.destroyAllWindows()
@@ -320,7 +395,8 @@ class Movenet:
         thread2.start()
         while self.danger_massage_flag[massages_flag] == False:
             time.sleep(1)
-        pyautogui.press("enter")
+        if thread2.is_alive():
+            pyautogui.press("enter")
         self.danger_massage[massages_flag] = False
 
     def alert_message(self, text, massages_flag):

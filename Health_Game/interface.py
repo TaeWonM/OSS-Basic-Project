@@ -293,7 +293,7 @@ class setting_screen:
                     case 0:
                         static.set_statious(self.bodys)
                         pygame.quit()
-                        sys.exit()
+                        sys.exit(1)
                     case 1:
                         self.move_screen = "Static"
                         self.move_interface_flag = True

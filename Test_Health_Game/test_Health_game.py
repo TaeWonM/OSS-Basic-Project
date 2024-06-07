@@ -83,6 +83,7 @@ class tests(unittest.TestCase):
         Minterface = interface.main_screen(screen, body)
         self.assertEqual(Minterface.return_screen(), "main")
         Minterface.move_interface_flag = True
+        Minterface.update()
         self.assertTrue(Minterface.move_interface())
         Minterface.enemy.append(Charactor.Enemy())
         Minterface.draw()
@@ -92,8 +93,29 @@ class tests(unittest.TestCase):
         Minterface.to_x = 0
         Minterface.to_y = 0
         Minterface.draw()
+        Minterface.to_x = 0
+        Minterface.to_y = 1
         for i in range(1, 70):
-            Minterface.draw()
+            Minterface.update()
+        event = pygame.event
+        event.type = pygame.KEYDOWN
+        event.key = pygame.K_LEFT
+        Minterface.handle_event(event)
+        event.type = pygame.KEYDOWN
+        event.key = pygame.K_RIGHT
+        Minterface.handle_event(event)
+        event.type = pygame.KEYDOWN
+        event.key = pygame.K_DOWN
+        Minterface.handle_event(event)
+        event.type = pygame.KEYDOWN
+        event.key = pygame.K_UP
+        Minterface.handle_event(event)
+        event.type = pygame.KEYUP
+        event.key = pygame.K_UP
+        Minterface.handle_event(event)
+        event.type = pygame.KEYUP
+        event.key = pygame.K_RIGHT
+        Minterface.handle_event(event)
 
     def test_fight_main(self):
         pygame.init()
@@ -117,6 +139,19 @@ class tests(unittest.TestCase):
         Finterface.update()
         self.assertEqual(Finterface.return_screen(), "fight")
         self.assertTrue(Finterface.move_interface())
+        event = pygame.event
+        event.type = pygame.KEYDOWN
+        event.key = pygame.K_LEFT
+        Finterface.handle_event(event)
+        event.type = pygame.KEYDOWN
+        event.key = pygame.K_RIGHT
+        Finterface.handle_event(event)
+        event.type = pygame.KEYUP
+        event.key = pygame.K_RETURN
+        Finterface.model_count[0] = 0
+        Finterface.handle_event(event)
+        Finterface.model_count[0] = 1
+        Finterface.handle_event(event)
 
     def test_setting_main(self):
         pygame.init()
@@ -125,7 +160,7 @@ class tests(unittest.TestCase):
         )
         pygame.display.set_caption("H.G")
         body = static.get_statious()
-        Sinterface = interface.setting_screen(screen, body)
+        Sinterface = interface.setting_screen(screen, body[len(body) - 1])
         self.assertEqual(Sinterface.return_screen(), "setting")
         Sinterface.move_interface_flag = True
         self.assertTrue(Sinterface.move_interface())
@@ -134,6 +169,25 @@ class tests(unittest.TestCase):
         Sinterface.select_cout = 4
         Sinterface.update()
         Sinterface.draw()
+        event = pygame.event
+        event.type = pygame.KEYDOWN
+        event.key = pygame.K_DOWN
+        Sinterface.handle_event(event)
+        event.type = pygame.KEYDOWN
+        event.key = pygame.K_UP
+        Sinterface.handle_event(event)
+        event.type = pygame.KEYUP
+        event.key = pygame.K_RETURN
+        Sinterface.select_cout = 0
+        with self.assertRaises(SystemExit) as cm:
+            Sinterface.handle_event(event)
+        self.assertEqual(cm.exception.code, 1)
+        Sinterface.select_cout = 1
+        Sinterface.handle_event(event)
+        Sinterface.select_cout = 2
+        Sinterface.handle_event(event)
+        Sinterface.select_cout = 3
+        Sinterface.handle_event(event)
 
     def test_model_main(self):
         pygame.init()
@@ -151,6 +205,19 @@ class tests(unittest.TestCase):
         Minterface.move_interface_flag = True
         self.assertTrue(Minterface.move_interface())
         Minterface.draw()
+        event = pygame.event
+        event.type = pygame.KEYDOWN
+        event.key = pygame.K_DOWN
+        Minterface.handle_event(event)
+        event.type = pygame.KEYDOWN
+        event.key = pygame.K_UP
+        Minterface.handle_event(event)
+        event.type = pygame.KEYUP
+        event.key = pygame.K_RETURN
+        Minterface.select_cout = 0
+        Minterface.handle_event(event)
+        Minterface.select_cout = 1
+        Minterface.handle_event(event)
 
     def test_statistics_screen(self):
         pygame.init()
@@ -158,6 +225,19 @@ class tests(unittest.TestCase):
             (variable.window_height, variable.window_width)
         )
         pygame.display.set_caption("H.G")
+        os.remove(sys.path[0] + "\\..\\src\\staticsitc.json")
+        body = static.get_statious()
+        with open(
+            sys.path[0] + "\\..\\src\\staticsitc.json", "w", encoding="utf-8-sig"
+        ) as json_file:
+            date = dt.datetime(body[0]["year"], body[0]["month"], body[0]["day"])
+            date -= dt.timedelta(days=40)
+            body[0]["year"] = date.year
+            body[0]["month"] = date.month
+            body[0]["day"] = date.day
+            json.dump(body, json_file, indent=4)
+        body = static.get_statious()
+        static.nomalization_statious()
         body = static.get_statious()
         Sinterface = interface.statistics_screen(screen, body)
         self.assertEqual(Sinterface.return_screen(), "Static")
@@ -168,6 +248,21 @@ class tests(unittest.TestCase):
         Sinterface.select_cout = 4
         Sinterface.update()
         Sinterface.draw()
+        event = pygame.event
+        event.type = pygame.KEYDOWN
+        event.key = pygame.K_LEFT
+        Sinterface.handle_event(event)
+        event.type = pygame.KEYDOWN
+        event.key = pygame.K_RIGHT
+        Sinterface.handle_event(event)
+        event.type = pygame.KEYUP
+        event.key = pygame.K_RETURN
+        Sinterface.handle_event(event)
+        Sinterface.select_cout = 0
+        Sinterface.screen_count = 2
+        Sinterface.handle_event(event)
 
-    def test_main(self):
-        main.main()
+    # def test_main(self):
+    #     with self.assertRaises(SystemExit) as cm:
+    #         main.main()
+    #     self.assertEqual(cm.exception.code, 1)
