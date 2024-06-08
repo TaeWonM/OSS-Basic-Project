@@ -1,5 +1,5 @@
 # 건강 게임 (Health Game)
-- Play game for your health
+- Play game for your health!!
 ## Introduce
 - It's a game inspired by a health game (etc. Ringpit).
   Please enjoy our game. XD
@@ -26,10 +26,31 @@
   python main.py
 ```
 # Game tips
-  1. Push-up pose capch
+1. Push-up pose capture
+- If you select push-up exercise, Please Be careful about posing
+- In this game, Cannot capture vertical pose..
+  - ex1)  
+![스크린샷 2024-06-08 153439](https://github.com/TaeWonM/OSS-Basic-Project/assets/129059512/cc6e0f3b-27a2-4f1e-a37e-c3c528e3e514)
+- This picture is a right pose for push-up..
+  - ex2)  
+![스크린샷 2024-06-08 153456](https://github.com/TaeWonM/OSS-Basic-Project/assets/129059512/18b9a7b0-f0d0-4878-9fbf-a0f6ddfa6a48)  
+2. Squat pose capture
+- But Squat can capture any pose
+  - ex1)  
+![스크린샷 2024-06-08 153512](https://github.com/TaeWonM/OSS-Basic-Project/assets/129059512/f3e3d814-9e3d-47f9-9793-8b7699b0a43f)
+  - ex2)  
+![스크린샷 2024-06-08 153525](https://github.com/TaeWonM/OSS-Basic-Project/assets/129059512/f16fec86-198a-417c-a5e1-2074b09cfd60)
+
 # Member
-  1. Min TaeWon [https://github.com/TaeWonM]
-  2. Choi Yoonseo [https://github.com/Gorushi]
+  1. Min TaeWon(민태원)(minququ123456@gmail.com) [https://github.com/TaeWonM]
+  
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=TaeWonM)](https://github.com/anuraghazra/github-readme-stats)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=TaeWonM&hide=contribs,prs&show_icons=true&theme=테마)  
+
+  2. Choi Yoonseo(최윤서) [https://github.com/Gorushi]  
+ 
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Gorushi)](https://github.com/anuraghazra/github-readme-stats)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Gorushi&hide=contribs,prs&show_icons=true&theme=테마)
 # Development Period
   2024.03.22(FRI) ~ 2024.06.08(SAT)
 # Test Appliances
