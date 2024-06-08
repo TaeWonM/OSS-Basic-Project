@@ -12,7 +12,7 @@
  - numpy >= 1.26.4
  - mediapipe >= 0.10.14  
 ## About License
-  - We follow the apache 2.0 and MIT Licenses.
+  - We follow the apache 2.0(mediapipe model) and MIT Licenses(movenet model).
   - [MIT license](https://github.com/TaeWonM/OSS-Basic-Project/blob/main/LICENSE-MIT)
   - [the apache 2.0 license](https://github.com/TaeWonM/OSS-Basic-Project/blob/main/LICENSE-Apache-2.0)
 ## Getting started
