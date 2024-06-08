@@ -48,7 +48,7 @@
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=TaeWonM)](https://github.com/anuraghazra/github-readme-stats)
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=TaeWonM&hide=contribs,prs&show_icons=true&theme=테마)  
 
-  2. Choi Yoonseo(최윤서) [https://github.com/Gorushi]  
+  2. Choi YunSeo(최윤서)(mou8208@naver.com) [https://github.com/Gorushi]  
  
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Gorushi)](https://github.com/anuraghazra/github-readme-stats)
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Gorushi&hide=contribs,prs&show_icons=true&theme=테마)
