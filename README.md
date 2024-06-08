@@ -10,6 +10,7 @@
  - pyautogui >= 0.9.54
  - opencv-python >= 4.9.0.80
  - numpy >= 1.26.4
+ - mediapipe >= 0.10.14
 ## Getting started
   1. Download Python (https://www.python.org/downloads/)
   2. After download, Please Set your Python path into environment variable.
@@ -18,7 +19,7 @@
 ```sh
   git clone ...........
   cd OSS-Basic-Project
-  pip3 install-r requirements.txt
+  pip3 install-r requirement.txt
 ```
   6. Finally, Move directory to Health_Game. Then, Put This Sentence in termainal
 ```sh
