@@ -10,7 +10,11 @@
  - pyautogui >= 0.9.54
  - opencv-python >= 4.9.0.80
  - numpy >= 1.26.4
- - mediapipe >= 0.10.14
+ - mediapipe >= 0.10.14  
+## About License
+  - We follow the apache 2.0 and MIT Licenses.
+  - [MIT license](https://github.com/TaeWonM/OSS-Basic-Project/blob/main/LICENSE-MIT)
+  - [the apache 2.0 license](https://github.com/TaeWonM/OSS-Basic-Project/blob/main/LICENSE-Apache-2.0)
 ## Getting started
   1. Download Python (https://www.python.org/downloads/)
   2. After download, Please Set your Python path into environment variable.
