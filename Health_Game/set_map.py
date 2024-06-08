@@ -42,11 +42,14 @@ class Ground(pygame.sprite.Sprite):
 
 # This mothod is for setting map
 # Game reads map.txt and add tiles into background
-def set_main_map(background_group):
-    map_file = sys.path[0] + "\\..\\src\\map.txt"
+def set_main_map(background_group, random):
+    map_file = [
+        sys.path[0] + "\\..\\src\\mapr.txt",
+        sys.path[0] + "\\..\\src\\mapg.txt",
+    ]
     map_data = []
 
-    with open(map_file, "r") as file:
+    with open(map_file[random], "r") as file:
         for line in file:
             map_data.append(line.strip("\n").split(" "))
     for col in range(0, len(map_data)):

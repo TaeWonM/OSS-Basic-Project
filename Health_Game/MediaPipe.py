@@ -11,6 +11,7 @@ import time
 class MediaPipe:
 
     def __init__(self):
+        self.kill_thread = False
         self.status = [0]
         self.movecount = [0]
         self.danger_massage = [False, False, False]
@@ -291,7 +292,7 @@ class MediaPipe:
                         self.danger_massage_flag[1] = True
                 # Flip the image horizontally for a selfie-view display.
                 cv2.imshow("MediaPipe Pose", cv2.flip(image, 1))
-                if cv2.waitKey(1) & 0xFF == 27:
+                if cv2.waitKey(1) == 27 or self.kill_thread:
                     for i in range(0, 3):
                         self.danger_massage_flag[i] = True
                     cv2.destroyAllWindows()
@@ -305,7 +306,7 @@ class MediaPipe:
         thread2.start()
         while self.danger_massage_flag[massages_flag] == False:
             time.sleep(1)
-        while thread2.is_alive():
+        if thread2.is_alive():
             pyautogui.press("enter")
         self.danger_massage[massages_flag] = False
 

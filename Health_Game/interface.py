@@ -38,7 +38,9 @@ class main_screen:
         self.enemy_index = 0
         self.enemy = []
         # variable that contains map_data
-        self.map_data = set_map.set_main_map(self.background_group)
+        self.map_data = set_map.set_main_map(
+            self.background_group, random.randint(0, 1)
+        )
 
     # This is a method to handle events
     # In this method, Catch direction key to implement player's movments
@@ -75,12 +77,16 @@ class main_screen:
                 self.enemy_index = i
         # This is the part of adding enemys if all enemys are eliminated
         if len(self.enemy) == 0:
+            mapnum = random.randint(0, 1)
+            self.background_group.empty()
+            self.map_data = set_map.set_main_map(self.background_group, mapnum)
             num = random.randint(4, 21)
             for i in range(0, num):
                 enemy = Charactor.Enemy()
                 enemy.rect.x = random.randint(0, 988)
                 enemy.rect.y = random.randint(0, 988)
-                self.enemy.append(enemy)
+                if not enemy.rect.colliderect(self.player.rect):
+                    self.enemy.append(enemy)
 
     # This is method to draw background and other characters
     def draw(self):
@@ -120,7 +126,6 @@ class fight_screen:
         # variable that contains all enemys
         self.enemys = enemy
         self.enemy = enemy[enemy_index]
-
         self.move_interface_flag = False
         # variable for check what button have chosen
         self.select_cout = 2
@@ -142,7 +147,7 @@ class fight_screen:
     # In this method, Catch direction key to implement pose detection models
     def handle_event(self, event):
         # if statement to detect model changes
-        if event.type == pygame.KEYDOWN:
+        if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
                 self.select_cout -= 1
             if event.key == pygame.K_RIGHT:
@@ -281,7 +286,7 @@ class setting_screen:
     # In this method, Catch direction key to change buttons
     def handle_event(self, event):
         # if statement to detect change buttons
-        if event.type == pygame.KEYDOWN:
+        if event.type == pygame.KEYUP:
             if event.key == pygame.K_UP:
                 self.select_cout -= 1
             if event.key == pygame.K_DOWN:
@@ -355,7 +360,7 @@ class model_select_screen:
     # In this method, Catch direction key to change buttons
     def handle_event(self, event):
         # if statement to detect change selections
-        if event.type == pygame.KEYDOWN:
+        if event.type == pygame.KEYUP:
             if event.key == pygame.K_UP:
                 self.select_cout -= 1
             if event.key == pygame.K_DOWN:
@@ -431,7 +436,7 @@ class statistics_screen:
     # In this method, Catch direction key to change buttons
     def handle_event(self, event):
         # if statement to detect change selections
-        if event.type == pygame.KEYDOWN:
+        if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
                 self.select_cout -= 1
             if event.key == pygame.K_RIGHT:
