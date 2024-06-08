@@ -4,3 +4,4 @@ tensorflow_hub >= 0.16.1
 pyautogui >= 0.9.54
 opencv-python >= 4.9.0.80
 numpy>=1.26.4
+mediapipe >= 0.10.14
