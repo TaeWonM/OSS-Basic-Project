@@ -78,6 +78,7 @@ class main_screen:
         # This is the part of adding enemys if all enemys are eliminated
         if len(self.enemy) == 0:
             mapnum = random.randint(0, 1)
+            self.background_group.empty()
             self.map_data = set_map.set_main_map(self.background_group, mapnum)
             num = random.randint(4, 21)
             for i in range(0, num):
