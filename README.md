@@ -1,9 +1,16 @@
-# Project Name
-- 건강 게임 (Health Game)
-- Introduce
+# 건강 게임 (Health Game)
+- Play game for your health
+## Introduce
 - It's a game inspired by a health game (etc. Ringpit).
   Please enjoy our game. XD
-# How to Run
+## About dependencies
+ - pygame  >= 2.5.2
+ - tensorflow >= 2.16.1
+ - tensorflow_hub >= 0.16.1
+ - pyautogui >= 0.9.54
+ - opencv-python >= 4.9.0.80
+ - numpy >= 1.26.4
+## Getting started
   1. Download Python (https://www.python.org/downloads/)
   2. After download, Please Set your Python path into environment variable.
   3. And Open Command command prompt.
@@ -15,6 +22,7 @@
 ```
   6. Finally, Move directory to Health_Game. Then, Put This Sentence in termainal
 ```sh
+  cd Test_Health_Game
   python main.py
 ```
 # Game tips
